@@ -1,0 +1,1619 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Source-backed multi-vendor networking study articles followed by a fifty-question senior-level routing and switching exam generated September 3, 2026 at 18:29 PST.">
+  <title>Multi-Vendor Networking Study Guide &amp; Exam — September 3, 2026 · 18:29 PST</title>
+  <style>
+    :root {
+      color-scheme: dark;
+      --bg: #07111e;
+      --panel: #0d1b2e;
+      --panel2: #122842;
+      --text: #eef6ff;
+      --muted: #aabbd0;
+      --line: #29445f;
+      --cyan: #55dbc9;
+      --blue: #77a9ff;
+      --green: #6be39b;
+      --red: #ff7d91;
+      --amber: #ffd16a;
+      --shadow: 0 18px 52px rgba(0,0,0,.28);
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      min-height: 100vh;
+      color: var(--text);
+      background:
+        radial-gradient(circle at 90% 0, rgba(85,219,201,.12), transparent 32rem),
+        radial-gradient(circle at 0 20%, rgba(119,169,255,.12), transparent 30rem),
+        var(--bg);
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      line-height: 1.55;
+    }
+    button, select, input { font: inherit; }
+    button, select {
+      border: 1px solid var(--line);
+      border-radius: .7rem;
+      color: var(--text);
+      background: #0b1a2d;
+    }
+    button { cursor: pointer; padding: .68rem .9rem; font-weight: 750; }
+    button:hover, button:focus-visible, select:focus-visible { border-color: var(--cyan); outline: none; }
+    button.primary { color: #05231e; background: var(--cyan); border-color: var(--cyan); }
+    button.secondary { background: var(--panel2); }
+    button.danger { color: #2b0710; background: var(--red); border-color: var(--red); }
+    button:disabled { cursor: not-allowed; opacity: .45; }
+    a { color: var(--blue); }
+    .wrap { width: min(1180px, calc(100% - 2rem)); margin: 0 auto; }
+    header { padding: 3rem 0 1.6rem; }
+    .eyebrow { margin: 0 0 .55rem; color: var(--cyan); font-size: .78rem; font-weight: 850; letter-spacing: .14em; text-transform: uppercase; }
+    h1 { max-width: 960px; margin: 0; font-size: clamp(2rem, 5vw, 4.2rem); line-height: 1; letter-spacing: -.045em; }
+    .lede { max-width: 880px; color: var(--muted); font-size: 1.05rem; }
+    .topline { display: flex; flex-wrap: wrap; gap: .55rem; margin-top: 1.2rem; }
+    .pill { display: inline-flex; align-items: center; padding: .3rem .65rem; border: 1px solid var(--line); border-radius: 999px; color: var(--muted); background: rgba(13,27,46,.8); font-size: .8rem; font-weight: 750; }
+    .layout { display: grid; grid-template-columns: 280px minmax(0, 1fr); gap: 1.2rem; padding-bottom: 4rem; }
+    .sidebar, .card, .report {
+      border: 1px solid var(--line);
+      border-radius: 1rem;
+      background: linear-gradient(145deg, rgba(18,40,66,.96), rgba(10,24,42,.96));
+      box-shadow: var(--shadow);
+    }
+    .sidebar { position: sticky; top: 1rem; align-self: start; padding: 1rem; }
+    .metric { display: flex; justify-content: space-between; gap: 1rem; padding: .45rem 0; border-bottom: 1px solid rgba(41,68,95,.65); color: var(--muted); }
+    .metric strong { color: var(--text); }
+    .progress-track { height: .65rem; margin: .8rem 0 1rem; overflow: hidden; border-radius: 999px; background: #06101d; }
+    .progress-bar { width: 0; height: 100%; background: linear-gradient(90deg, var(--cyan), var(--blue)); transition: width .2s ease; }
+    .filters { display: grid; gap: .65rem; }
+    .filters label { display: grid; gap: .25rem; color: var(--muted); font-size: .8rem; }
+    .filters select { width: 100%; padding: .55rem; }
+    .jump-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: .35rem; margin-top: 1rem; max-height: 260px; overflow: auto; }
+    .jump { padding: .35rem; font-size: .75rem; }
+    .jump.current { outline: 2px solid var(--cyan); }
+    .jump.answered { background: #183859; }
+    .jump.correct { color: #052515; background: var(--green); border-color: var(--green); }
+    .jump.incorrect { color: #2c0710; background: var(--red); border-color: var(--red); }
+    .jump.review::after { content: "•"; color: var(--amber); margin-left: 2px; }
+    .question-area { min-width: 0; }
+    .card { padding: clamp(1.1rem, 3vw, 2rem); }
+    .qmeta { display: flex; flex-wrap: wrap; gap: .45rem; margin-bottom: 1rem; }
+    .qmeta span { padding: .25rem .55rem; border-radius: .5rem; background: rgba(7,17,30,.65); color: var(--muted); font-size: .76rem; font-weight: 800; }
+    .qmeta .number { color: #05231e; background: var(--cyan); }
+    h2 { margin: 0; font-size: clamp(1.25rem, 3vw, 1.65rem); line-height: 1.35; }
+    .instruction { color: var(--amber); font-size: .88rem; font-weight: 750; }
+    .exhibit { margin: 1.2rem 0; padding: 1rem; overflow-x: auto; border: 1px solid #355574; border-radius: .8rem; color: #d8e8f7; background: #050d17; white-space: pre-wrap; font: .86rem/1.5 ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; }
+    .options { display: grid; gap: .7rem; margin: 1.2rem 0; }
+    .option { display: grid; grid-template-columns: auto 1fr; gap: .7rem; align-items: start; padding: .85rem; border: 1px solid var(--line); border-radius: .8rem; background: rgba(7,17,30,.52); cursor: pointer; }
+    .option:hover { border-color: #4e7197; }
+    .option.correct { border-color: var(--green); background: rgba(107,227,155,.1); }
+    .option.incorrect { border-color: var(--red); background: rgba(255,125,145,.1); }
+    .option input { margin-top: .26rem; accent-color: var(--cyan); }
+    .feedback { display: none; margin-top: 1rem; padding: 1rem; border: 1px solid var(--line); border-radius: .8rem; background: rgba(5,13,23,.72); }
+    .feedback.visible { display: block; }
+    .feedback h3 { margin: 0 0 .5rem; }
+    .feedback p { margin: .55rem 0; color: var(--muted); }
+    .feedback .result-correct { color: var(--green); }
+    .feedback .result-incorrect { color: var(--red); }
+    .actions { display: flex; flex-wrap: wrap; gap: .55rem; margin-top: 1.25rem; }
+    .nav { display: flex; justify-content: space-between; gap: 1rem; margin-top: 1rem; }
+    .source { margin-top: 1rem; padding-top: .8rem; border-top: 1px solid var(--line); font-size: .85rem; }
+    .report { display: none; margin-bottom: 1.2rem; padding: 1.3rem; }
+    .report.visible { display: block; }
+    .report-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: .7rem; }
+    .report-box { padding: .85rem; border: 1px solid var(--line); border-radius: .75rem; background: rgba(7,17,30,.55); }
+    .report-box strong { display: block; color: var(--cyan); font-size: 1.3rem; }
+    .noscript { margin: 1rem auto; padding: 1rem; color: #2a1800; background: var(--amber); }
+    .study-shell { margin-bottom: 2rem; }
+    .study-intro, .study-toc, .study-article, .quiz-intro {
+      border: 1px solid var(--line);
+      border-radius: 1rem;
+      background: linear-gradient(145deg, rgba(18,40,66,.96), rgba(10,24,42,.96));
+      box-shadow: var(--shadow);
+    }
+    .study-intro { display: grid; grid-template-columns: minmax(0,1fr) auto; gap: 1.2rem; align-items: center; padding: clamp(1.2rem, 4vw, 2rem); }
+    .study-intro h2, .study-toc h2, .study-article h2, .quiz-intro h2 { margin: 0; }
+    .study-intro p, .study-article p, .study-article li, .quiz-intro p { color: var(--muted); }
+    .start-quiz {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: .8rem 1rem;
+      border-radius: .75rem;
+      color: #05231e;
+      background: var(--cyan);
+      font-weight: 850;
+      text-decoration: none;
+      white-space: nowrap;
+    }
+    .study-toc { margin-top: 1rem; padding: 1.2rem; }
+    .vendor-corpus { margin-top: 1rem; }
+    .vendor-corpus-head { padding: 1.2rem; border: 1px solid var(--line); border-radius: 1rem; background: linear-gradient(145deg, rgba(18,40,66,.96), rgba(10,24,42,.96)); box-shadow: var(--shadow); }
+    .vendor-corpus-head h2 { margin: 0; }
+    .vendor-corpus-head p { margin-bottom: 0; color: var(--muted); }
+    .vendor-articles { display: grid; grid-template-columns: repeat(2, minmax(0,1fr)); gap: 1rem; margin-top: 1rem; }
+    .vendor-article { scroll-margin-top: 1rem; padding: 1.2rem; border: 1px solid var(--line); border-radius: 1rem; background: linear-gradient(145deg, rgba(18,40,66,.96), rgba(10,24,42,.96)); box-shadow: var(--shadow); }
+    .vendor-article h3 { margin: .2rem 0 .55rem; color: var(--cyan); font-size: 1.25rem; }
+    .vendor-article p { color: var(--muted); }
+    .vendor-article .question-map { display: inline-flex; padding: .25rem .55rem; border-radius: 999px; color: #07111e; background: var(--amber); font-size: .74rem; font-weight: 850; }
+    .decision-grid { display: grid; grid-template-columns: repeat(2, minmax(0,1fr)); gap: .75rem; margin: .85rem 0; }
+    .decision-box { padding: .8rem; border: 1px solid var(--line); border-radius: .7rem; background: rgba(7,17,30,.48); }
+    .decision-box h4 { margin: 0 0 .35rem; color: var(--text); font-size: .9rem; }
+    .decision-box p, .decision-box ul { margin: .25rem 0; color: var(--muted); font-size: .86rem; }
+    .decision-box ul { padding-left: 1.1rem; }
+    .official-article { margin-top: .8rem; padding-top: .7rem; border-top: 1px solid var(--line); font-size: .86rem; }
+    .official-article strong { display: block; color: var(--text); }
+    .visual-refs { margin-top: .7rem; padding: .7rem .8rem; border-left: 3px solid var(--blue); border-radius: .3rem .65rem .65rem .3rem; background: rgba(119,169,255,.07); color: var(--muted); font-size: .84rem; }
+    .visual-refs strong { color: var(--text); }
+    .source-figures { display: grid; grid-template-columns: repeat(2, minmax(0,1fr)); gap: .75rem; margin: .85rem 0; }
+    .source-figure { margin: 0; overflow: hidden; border: 1px solid var(--line); border-radius: .75rem; background: #fff; }
+    .source-figure a { display: block; }
+    .source-figure img { display: block; width: 100%; height: 260px; object-fit: contain; padding: .45rem; background: #fff; }
+    .source-figure figcaption { padding: .65rem .75rem; color: #cfdef0; background: #0b1a2d; font-size: .78rem; }
+    .toc-grid { display: grid; grid-template-columns: repeat(3, minmax(0,1fr)); gap: .55rem; margin: 1rem 0 0; padding: 0; list-style: none; }
+    .toc-grid a { display: block; height: 100%; padding: .65rem .75rem; border: 1px solid var(--line); border-radius: .65rem; color: var(--text); background: rgba(7,17,30,.5); text-decoration: none; font-size: .86rem; }
+    .toc-grid a:hover, .toc-grid a:focus-visible { border-color: var(--cyan); }
+    .study-article { scroll-margin-top: 1rem; margin-top: 1rem; padding: clamp(1.2rem, 4vw, 2rem); }
+    .article-kicker { margin: 0 0 .35rem !important; color: var(--cyan) !important; font-size: .75rem; font-weight: 850; letter-spacing: .12em; text-transform: uppercase; }
+    .article-grid { display: grid; grid-template-columns: repeat(2, minmax(0,1fr)); gap: 1rem; }
+    .article-grid h3 { margin: .8rem 0 .3rem; font-size: 1rem; }
+    .study-article ul { padding-left: 1.2rem; }
+    .study-article code { color: #e8f5ff; background: #06101c; padding: .08rem .28rem; border-radius: .3rem; }
+    .callout { margin: 1rem 0; padding: .85rem 1rem; border-left: 4px solid var(--amber); border-radius: .35rem .7rem .7rem .35rem; color: #f3dfae; background: rgba(255,209,106,.08); }
+    .sources { margin-top: 1rem; padding-top: .8rem; border-top: 1px solid var(--line); font-size: .86rem; }
+    .sources strong { color: var(--text); }
+    .sources a { margin-right: .6rem; }
+    .quiz-intro { scroll-margin-top: 1rem; margin: 2rem 0 1rem; padding: 1.2rem; }
+    .exam-status { position: sticky; top: .5rem; z-index: 5; display: grid; grid-template-columns: auto minmax(120px,1fr) auto; gap: .8rem; align-items: center; margin: 0 0 1rem; padding: .8rem 1rem; border: 1px solid var(--line); border-radius: .85rem; background: rgba(7,17,30,.96); box-shadow: var(--shadow); }
+    .exam-status strong { white-space: nowrap; }
+    .all-questions { display: grid; gap: 1rem; }
+    .full-question { scroll-margin-top: 5.5rem; }
+    .full-question.correct-card { border-color: var(--green); }
+    .full-question.incorrect-card, .full-question.unanswered-card { border-color: var(--red); }
+    .design-focus { margin: .8rem 0; padding: .7rem .8rem; border-left: 3px solid var(--amber); border-radius: .3rem .65rem .65rem .3rem; color: #f3dfae; background: rgba(255,209,106,.07); font-size: .88rem; }
+    .submit-panel { margin: 1rem 0 4rem; padding: 1.3rem; border: 2px solid var(--cyan); border-radius: 1rem; background: linear-gradient(145deg, rgba(18,40,66,.98), rgba(10,24,42,.98)); box-shadow: var(--shadow); }
+    .submit-panel h2 { margin: 0 0 .35rem; }
+    .submit-panel p { color: var(--muted); }
+    .submit-panel .actions { align-items: center; }
+    .submit-panel .primary { padding: .85rem 1.2rem; }
+    footer { padding: 1.5rem 0 2.5rem; border-top: 1px solid var(--line); color: var(--muted); font-size: .82rem; }
+    @media (max-width: 850px) {
+      .layout { grid-template-columns: 1fr; }
+      .sidebar { position: static; }
+      .jump-grid { grid-template-columns: repeat(10, 1fr); max-height: none; }
+      .toc-grid { grid-template-columns: repeat(2, minmax(0,1fr)); }
+      .vendor-articles { grid-template-columns: 1fr; }
+      .exam-status { position: static; grid-template-columns: 1fr; }
+    }
+    @media (max-width: 520px) {
+      .jump-grid { grid-template-columns: repeat(5, 1fr); }
+      .report-grid { grid-template-columns: 1fr; }
+      .nav button { flex: 1; }
+      .study-intro, .article-grid, .decision-grid { grid-template-columns: 1fr; }
+      .source-figures { grid-template-columns: 1fr; }
+      .toc-grid { grid-template-columns: 1fr; }
+    }
+    @media print {
+      body { color: #111; background: #fff; }
+      header { padding-top: 1rem; }
+      .sidebar, .submit-panel .actions, .nav, .exam-status { display: none !important; }
+      .layout { display: block; }
+      .card, .report, .submit-panel { color: #111; background: #fff; box-shadow: none; border-color: #bbb; }
+      .full-question { break-inside: avoid; margin-bottom: .8rem; }
+      .feedback { display: block; background: #fff; }
+      .feedback p, .lede, .section-note { color: #333; }
+      a { color: #111; }
+    }
+  </style>
+</head>
+<body>
+  <noscript><div class="noscript wrap">JavaScript is required to render and score all 50 questions. The vendor articles and source references remain available without it.</div></noscript>
+  <header class="wrap">
+    <p class="eyebrow">General Concepts · Daily Exam · September 3, 2026 · Run 18:29 PST</p>
+    <h1>Multi-Vendor Networking Study Guide &amp; Exam</h1>
+    <p class="lede">Read the source-backed topic articles first, then take fifty original senior-to-architect scenarios covering Layer 2 resiliency, OSPF/OSPFv3, BGP, IS-IS, RIP, EIGRP, convergence, hardware forwarding, and vendor-specific operational behavior. This is independent study material—not an exam dump.</p>
+    <div class="topline">
+      <span class="pill">14 vendor articles + 13 protocol primers</span>
+      <span class="pill">50 questions</span>
+      <span class="pill">14 named vendor ecosystems</span>
+      <span class="pill">CLI, topology &amp; timeline evidence</span>
+      <span class="pill">External vendor-hosted figures</span>
+    </div>
+  </header>
+
+  <main class="wrap">
+    <section id="study-guide" class="study-shell" aria-labelledby="study-title">
+      <div class="study-intro">
+        <div>
+          <p class="article-kicker">Part I · Read before testing</p>
+          <h2 id="study-title">Vendor articles first, then protocol primers</h2>
+          <p>Fourteen clearly labeled vendor articles summarize the official documents used to build the quiz and map them to their corresponding questions. Cross-vendor protocol primers follow. The complete 50-question quiz begins only after all reading.</p>
+        </div>
+        <a class="start-quiz" href="#quiz">Skip to the quiz →</a>
+      </div>
+
+      <section class="vendor-corpus" aria-labelledby="vendor-corpus-title">
+        <div class="vendor-corpus-head">
+          <p class="article-kicker">Official vendor corpus · 14 vendors</p>
+          <h2 id="vendor-corpus-title">Articles from the vendors represented in the quiz</h2>
+          <p>Each card identifies the corresponding quiz questions and links directly to the vendor's public documentation. The summaries below are original study notes derived from those sources. Where an official article publishes a useful topology or architecture figure, it is shown through the vendor's external HTTPS image URL—nothing is packaged into this HTML. Select any figure to open its original article; if a vendor blocks remote display, the caption link remains available.</p>
+        </div>
+        <div class="vendor-articles">
+          <article id="vendor-cisco" class="vendor-article">
+            <span class="question-map">Questions 1–2, 12, 14, 17, 26, 30, 32, 47, 50</span>
+            <h3>Cisco</h3>
+            <p>Cisco's MST guidance makes region identity depend on the name, revision, and full VLAN-to-instance map; a digest difference creates a boundary even when the trunk is physically healthy. Nexus vPC documentation adds a separate failure-domain lesson: single-attached orphan ports do not inherit every vPC member-port behavior unless explicitly configured. Cisco OSPF troubleshooting ties EXSTART/EXCHANGE failures to unsuccessful database-description exchange, with MTU mismatch a frequent inter-vendor cause. Its BGP best-path material shows why Weight and LOCAL_PREF can dominate AS-path length and why multipath still requires attribute equivalence. Optimal Route Reflection addresses the fact that a centralized reflector selects from its own IGP perspective, which can be wrong for a distant client.</p>
+            <div class="decision-grid">
+              <div class="decision-box"><h4>Use these designs when</h4><ul><li>Use MST when many VLANs need only a few deterministic Layer 2 topologies.</li><li>Use vPC when dual-homed endpoints need active-active bandwidth and node redundancy.</li><li>Use ORR or add-path when reflector and client exit perspectives materially differ.</li></ul></div>
+              <div class="decision-box"><h4>Choose the alternative when</h4><ul><li>Use Rapid-PVST+ when per-VLAN roots justify the extra state; use routed access when Layer 2 failure domains should end at the edge.</li><li>Use a true chassis/stack when a single control plane is operationally preferable.</li><li>Use ordinary reflection when topology is small and reflector placement already matches client cost.</li></ul></div>
+              <div class="decision-box"><h4>Failure modes to design out</h4><p>MST digest drift, unintended superior roots, unsafe orphan forwarding, OSPF MTU mismatch, non-equivalent multipath candidates, and reflection based on the wrong IGP viewpoint.</p></div>
+              <div class="decision-box"><h4>Evidence before change</h4><p>Compare MST digest and boundary status; vPC consistency, role, peer-link, and orphan state; OSPF DBD/MTU counters; then BGP received, valid, best, RIB, and advertised stages.</p></div>
+            </div>
+            <div class="source-figures">
+              <figure class="source-figure"><a href="https://www.cisco.com/c/en/us/support/docs/lan-switching/spanning-tree-protocol/24248-147.html"><img loading="lazy" referrerpolicy="no-referrer" src="https://www.cisco.com/c/dam/en/us/support/docs/lan-switching/spanning-tree-protocol/24248-147-02.gif" alt="Cisco diagram comparing two MST instances across redundant access and distribution links"></a><figcaption>Cisco original: MST keeps two logical topologies while reducing per-VLAN protocol state. Open the official article.</figcaption></figure>
+              <figure class="source-figure"><a href="https://www.cisco.com/c/en/us/support/docs/lan-switching/spanning-tree-protocol/24248-147.html"><img loading="lazy" referrerpolicy="no-referrer" src="https://www.cisco.com/c/dam/en/us/support/docs/lan-switching/spanning-tree-protocol/24248-147-03.gif" alt="Cisco diagram showing two different MST regions and a region boundary"></a><figcaption>Cisco original: different region identities create a boundary even across a working trunk. Open the official article.</figcaption></figure>
+            </div>
+            <p class="official-article"><strong>Official articles:</strong>
+              <a href="https://www.cisco.com/c/en/us/support/docs/lan-switching/spanning-tree-protocol/24248-147.html">Understand Multiple Spanning Tree Protocol</a> ·
+              <a href="https://www.cisco.com/c/en/us/td/docs/dcn/nx-os/nexus9000/105x/configuration/interfaces/cisco-nexus-9000-series-nx-os-interfaces-configuration-guide-release-105x/m_configuring_vpcs_9x.html">Nexus 9000 vPC Configuration</a> ·
+              <a href="https://www.cisco.com/c/en/us/support/docs/ip/open-shortest-path-first-ospf/13684-12.html">OSPF EXSTART/EXCHANGE Troubleshooting</a> ·
+              <a href="https://www.cisco.com/c/en/us/support/docs/ip/border-gateway-protocol-bgp/13753-25.html">Select BGP Best Path</a>
+            </p>
+          </article>
+
+          <article id="vendor-juniper" class="vendor-article">
+            <span class="question-map">Questions 5, 29, 35, 42, 45</span>
+            <h3>Juniper Networks</h3>
+            <p>Junos MC-LAG documentation separates the Inter-Chassis Control Protocol from the interchassis data link. ICCP synchronizes configuration and operational state over TCP; the ICL can remain up while control state is stale. Junos BGP material emphasizes protocol next-hop resolution: an iBGP route can be received and policy-accepted yet remain hidden when its next hop does not resolve in the correct routing table. Routing policies also distinguish exact prefixes from more-specific matches, making prefix-length intent essential. Routing instances isolate tables and protocol processes, so reachability present in the global table does not satisfy a route installed in a separate VRF. The quiz uses these distinctions to test state rather than command memorization.</p>
+            <div class="decision-grid">
+              <div class="decision-box"><h4>Use MC-LAG when</h4><p>A conventional LACP client needs active links to two nodes without speaking EVPN or running STP across those attachments. Provide resilient routed ICCP reachability and an appropriately sized ICL.</p></div>
+              <div class="decision-box"><h4>Prefer another design when</h4><p>Use single-chassis LAG for link-only redundancy, Virtual Chassis when one managed control plane is required, or EVPN multihoming when standards-based fabric scale and reduced peer-link dependence matter more.</p></div>
+              <div class="decision-box"><h4>Policy design choice</h4><p>Use exact matches for a single NLRI and prefix-length ranges for components. Resolve protocol next hops inside the route's own routing instance rather than leaking global-table assumptions into a VRF.</p></div>
+              <div class="decision-box"><h4>Operational gates</h4><p>Prove TCP/IP reachability for ICCP, ICL forwarding, service ID and LACP consistency separately. For BGP, inspect hidden-route reason, policy trace, recursion table, active route, and export result.</p></div>
+            </div>
+            <div class="source-figures">
+              <figure class="source-figure"><a href="https://www.juniper.net/documentation/us/en/software/junos/mc-lag/topics/concept/mc-lag-feature-summary-best-practices.html"><img loading="lazy" referrerpolicy="no-referrer" src="https://www.juniper.net/documentation/us/en/software/junos/mc-lag/images/g043028.png" alt="Juniper basic MC-LAG topology with ICCP, ICL, and an LACP client"></a><figcaption>Juniper original: ICCP is the peer control relationship; the ICL is the peer data path. Open the official article.</figcaption></figure>
+            </div>
+            <p class="official-article"><strong>Official articles:</strong>
+              <a href="https://www.juniper.net/documentation/us/en/software/junos/mc-lag/topics/concept/mc-lag-feature-summary-best-practices.html">Understanding MC-LAGs</a> ·
+              <a href="https://www.juniper.net/documentation/us/en/software/junos/bgp/topics/topic-map/bgp-overview.html">BGP Overview and Resolution</a> ·
+              <a href="https://www.juniper.net/documentation/us/en/software/junos/junos-overview/topics/concept/routing-policy-overview.html">Routing Policy Overview</a>
+            </p>
+          </article>
+
+          <article id="vendor-arista" class="vendor-article">
+            <span class="question-map">Questions 4, 21–22, 41</span>
+            <h3>Arista</h3>
+            <p>EOS MLAG guidance documents both peer liveness and post-reload sequencing. Reload delay keeps non-peer links from forwarding before multicast, OSPF, ARP, and related state have stabilized. EOS OSPFv3 documentation reinforces that the protocol runs on links and uses IPv6 link-local neighbor communication; mismatched global prefixes may be an addressing concern without automatically preventing adjacency. BFD accelerates detection, but the routing process, RIB, hardware FIB, and application still recover on separate timelines. EOS Graceful Restart guidance illustrates the opposite tradeoff: retaining stale routes can preserve traffic only when the restarting peer continues forwarding. If its data plane is not preserved, a helper can send traffic into a blackhole.</p>
+            <div class="decision-grid">
+              <div class="decision-box"><h4>Use MLAG when</h4><p>Attached systems require active-active Layer 2 dual-homing and cannot use EVPN multihoming. Size the peer link for failure traffic and delay access admission until dependent state is ready.</p></div>
+              <div class="decision-box"><h4>Use routed leaf or EVPN when</h4><p>You want smaller broadcast domains, independent failure containment, or fabric-scale multihoming without a pair-specific Layer 2 peer link. The tradeoff is added routing/overlay design and endpoint capability.</p></div>
+              <div class="decision-box"><h4>Fast failure versus safe recovery</h4><p>BFD shortens detection; it does not program the FIB or repair applications. Graceful Restart preserves routes; it is safe only when forwarding survives. Reload delay intentionally withholds links to avoid premature traffic.</p></div>
+              <div class="decision-box"><h4>Measure the full timeline</h4><p>Record fault, BFD down, protocol withdrawal, RIB selection, FIB programming, MLAG member admission, ARP/ND synchronization, and application success as separate timestamps.</p></div>
+            </div>
+            <div class="source-figures">
+              <figure class="source-figure"><a href="https://www.arista.com/en/um-eos/eos-sample-configurations"><img loading="lazy" referrerpolicy="no-referrer" src="https://www.arista.com/assets/images/user-manual/um-eos/Graphics/EVPN/Layer%203%20EVPN%20Configuration.png" alt="Arista EVPN sample topology showing routed leaves and an MLAG leaf pair"></a><figcaption>Arista original: compare independent routed leaves with an MLAG pair inside one EVPN design. Open the official sample configuration.</figcaption></figure>
+            </div>
+            <p class="official-article"><strong>Official articles:</strong>
+              <a href="https://www.arista.com/en/um-eos/eos-multi-chassis-link-aggregation">EOS Multi-Chassis Link Aggregation</a> ·
+              <a href="https://www.arista.com/en/um-eos/eos-open-shortest-path-first-version-3">EOS OSPFv3</a> ·
+              <a href="https://www.arista.com/en/um-eos/eos-smart-system-upgrade">EOS Smart System Upgrade</a>
+            </p>
+          </article>
+
+          <article id="vendor-aruba" class="vendor-article">
+            <span class="question-map">Question 3; related Layer 2 comparison in Questions 4–12</span>
+            <h3>Aruba</h3>
+            <p>AOS-CX VSX presents two physical switches as a coordinated active-active system while retaining distinct control planes. The Inter-Switch Link carries synchronized and forwarded state; keepalive provides an independent peer-reachability signal. Active Gateway gives both peers a common first-hop identity on configured SVIs. During an ISL split, interfaces that are not protected by an MCLAG can create dual-active exposure, so AOS-CX provides shutdown-on-split behavior for applicable interfaces. The operational lesson is to distinguish ISL status, keepalive status, configuration synchronization, MCLAG state, active-gateway state, and the treatment of non-MCLAG interfaces rather than treating “VSX up/down” as one Boolean.</p>
+            <div class="decision-grid">
+              <div class="decision-box"><h4>Use VSX when</h4><p>You need active-active Layer 2/Layer 3 edge service with independent control planes, hitless peer maintenance options, and conventional LACP clients. Active Gateway removes first-hop active/standby asymmetry.</p></div>
+              <div class="decision-box"><h4>Choose VSF, VRRP, or routed links when</h4><p>VSF suits a supported single-control-plane stack; VRRP suits explicit active/standby first-hop behavior; routed links suit smaller Layer 2 blast radius and simpler split-brain semantics.</p></div>
+              <div class="decision-box"><h4>Split-brain choice</h4><p>Keepalive must be independent enough to distinguish peer failure from ISL failure. Use shutdown-on-split for applicable non-MCLAG interfaces that otherwise remain active on both halves.</p></div>
+              <div class="decision-box"><h4>Capacity and validation</h4><p>Size the ISL for east-west and single-homed failover traffic. Test ISL-only failure, keepalive-only failure, peer loss, reload, and recovery while observing gateways, MCLAGs, and non-MCLAG interfaces.</p></div>
+            </div>
+            <p class="visual-refs"><strong>Official visual reference:</strong> <a href="https://www.arubanetworks.com/techdocs/AOS-CX/10.08/PDF/vsx.pdf#page=12">VSX solution and sample topology figures in the AOS-CX guide</a>. This source is a PDF, so the page link opens the vendor-rendered figure rather than hot-linking a copied bitmap.</p>
+            <p class="official-article"><strong>Official article:</strong>
+              <a href="https://www.arubanetworks.com/techdocs/AOS-CX/10.08/PDF/vsx.pdf">AOS-CX Virtual Switching Extension Guide</a>
+            </p>
+          </article>
+
+          <article id="vendor-hpe" class="vendor-article">
+            <span class="question-map">Question 11; split-brain comparison in Questions 3–8</span>
+            <h3>HPE</h3>
+            <p>HPE Comware IRF combines member switches into one managed fabric with shared Layer 2 and Layer 3 identity. If the IRF links fail, both partitions can become active with the same gateway addresses and routing configuration. Multi-Active Detection exists to identify that collision and place one partition into Recovery state. HPE documents BFD MAD as one method and also supports platform-dependent LACP, ARP, or ND MAD options. The detection path must be designed independently enough to survive the failure being tested. Operators should use <code>display irf</code>, <code>display irf topology</code>, and <code>display mad verbose</code> together; an IRF member view alone does not prove collision handling is operational.</p>
+            <div class="decision-grid">
+              <div class="decision-box"><h4>Use IRF when</h4><p>A supported switch family benefits from one management/control plane, distributed link aggregation, and chassis-like operations. Prefer a ring over a daisy chain when the platform supports it so one IRF-link loss does not partition the fabric.</p></div>
+              <div class="decision-box"><h4>Use independent routed switches when</h4><p>Fault isolation, software diversity, and simpler upgrade domains outweigh the operational convenience of one logical device. The design then needs explicit first-hop and routing redundancy.</p></div>
+              <div class="decision-box"><h4>Choose the MAD path deliberately</h4><p>BFD MAD is fast and explicit; LACP, ARP, or ND MAD can reuse other connectivity when supported. Any choice fails its purpose if the detection path disappears with the IRF links it monitors.</p></div>
+              <div class="decision-box"><h4>Prove collision handling</h4><p>Validate topology and MAD state before failure, split both IRF paths in a controlled window, confirm exactly one partition enters Recovery, and verify excluded management/MAD interfaces behave as designed.</p></div>
+            </div>
+            <p class="visual-refs"><strong>Official visual reference:</strong> <a href="https://support.hpe.com/hpesc/public/api/document/c04567141#page=17">HPE IRF guide figures for BFD MAD with and without an intermediate device</a>. The vendor PDF is linked to preserve its original figure context.</p>
+            <p class="official-article"><strong>Official articles:</strong>
+              <a href="https://support.hpe.com/hpesc/public/docDisplay?docId=sf000097018en_us">Configure BFD MAD in Comware IRF</a> ·
+              <a href="https://support.hpe.com/hpesc/public/docDisplay?docId=sf000048717en_us">HPE Multi-Active Detection with BFD</a>
+            </p>
+          </article>
+
+          <article id="vendor-nokia" class="vendor-article">
+            <span class="question-map">Questions 8, 13, 43</span>
+            <h3>Nokia</h3>
+            <p>SR OS treats a LAG as one logical forwarding interface while maintaining per-flow ordering through hardware hashing. One large flow can stay on one member even when thousands of flows balance across the group. Nokia's LAG thresholds make partial capacity loss visible to routing: port, hash-weight, or bandwidth thresholds can alter the LAG's operational state or its OSPF/IS-IS cost. Cost precedence matters. A static threshold cost can outrank an explicit IGP cost, while a dynamic threshold cost may not. This makes staged degradation possible—deprefer a path at one threshold, then declare it down at another—but only if the effective metric is verified under actual member failures.</p>
+            <div class="decision-grid">
+              <div class="decision-box"><h4>Use LAG when</h4><p>Parallel links terminate on the same logical peers and in-order forwarding per flow matters. LACP adds compatibility and liveness negotiation; it does not promise one-flow striping.</p></div>
+              <div class="decision-box"><h4>Use routed ECMP when</h4><p>Links should be independent Layer 3 adjacencies, failure domains should remain separate, or capacity spans multiple next-hop devices. ECMP still hashes by flow and requires routing convergence.</p></div>
+              <div class="decision-box"><h4>Static versus dynamic threshold</h4><p>Use a static degradation cost when a fixed deterministic metric should take precedence; use dynamic cost when the metric should track remaining capacity while respecting the documented explicit-cost precedence.</p></div>
+              <div class="decision-box"><h4>Test the effective behavior</h4><p>Remove one member at a time and record LAG state, threshold crossings, effective OSPF/IS-IS metric, RIB choice, FIB members, flow distribution, and the final operational-down point.</p></div>
+            </div>
+            <div class="source-figures"><figure class="source-figure"><a href="https://documentation.nokia.com/sas/25-9/books/dk-interface-config/lag.html"><img loading="lazy" referrerpolicy="no-referrer" src="https://documentation.nokia.com/sas/25-9/books/dk-interface-config/graphics/ossg01_2.png" alt="Nokia diagram of a four-link LAG between two routers"></a><figcaption>Nokia original: four physical links form one logical LAG while flow ordering is retained. Open the official article.</figcaption></figure></div>
+            <p class="official-article"><strong>Official articles:</strong>
+              <a href="https://documentation.nokia.com/sr/26-7/7750-sr/books/interface-configuration/lag.html">SR OS LAG and Thresholds</a> ·
+              <a href="https://documentation.nokia.com/sr/25-10/7750-sr/books/services-configuration-reference/show-commands.html">SR OS Routing Show Commands</a>
+            </p>
+          </article>
+
+          <article id="vendor-fortinet" class="vendor-article">
+            <span class="question-map">Questions 6 and 40</span>
+            <h3>Fortinet</h3>
+            <p>FortiSwitch MCLAG split-brain detection can transition one peer to dormant when the interchassis link fails. FortiSwitchOS release behavior uses configured split-brain priority and then a MAC-address tie-break when priorities match; the relevant diagnostics include <code>diagnose switch mclag icl</code> and <code>diagnose switch mclag list</code>. On FortiGate, BGP route receipt is only one stage. An iBGP route with an inaccessible next hop cannot become the usable best route or enter the routing table. <code>get router info bgp network</code> shows the BGP path and inaccessible next hop, while <code>get router info routing-table details</code> tests recursive reachability. Firewall policy and NAT cannot repair a route that is not yet eligible for forwarding.</p>
+            <div class="decision-grid">
+              <div class="decision-box"><h4>Use MCLAG when</h4><p>FortiSwitch peers must provide node-redundant LACP service to dual-attached access devices. Define the split-brain priority and expected dormant peer before production rather than accepting an accidental tie-break.</p></div>
+              <div class="decision-box"><h4>Use stacking or routed access when</h4><p>Stacking is preferable when a supported single logical control plane is desired; routed access is preferable when Layer 2 domains and peer-state dependencies should be minimized.</p></div>
+              <div class="decision-box"><h4>BGP repair choice</h4><p>When an iBGP path is valid but inaccessible, restore IGP/static recursion or deliberately use next-hop self. Change import policy only when the route is filtered, not when the next hop is unresolved.</p></div>
+              <div class="decision-box"><h4>Verification sequence</h4><p>For MCLAG, prove ICL, peer election, LACP members, and dormant action. For BGP, follow received → accepted → recursively resolved → best → routing table → FIB before examining firewall policy.</p></div>
+            </div>
+            <p class="visual-refs"><strong>Official visual reference:</strong> <a href="https://docs.fortinet.com/document/fortiswitch/7.4.5/fortilink-guide/780635/switch-redundancy-with-mclag">Fortinet switch-redundancy MCLAG topology</a>. The source controls its image delivery, so the live article is the durable visual URL.</p>
+            <p class="official-article"><strong>Official articles:</strong>
+              <a href="https://docs.fortinet.com/document/fortiswitch/7.2.0/administration-guide/860027/mclag">FortiSwitch MCLAG</a> ·
+              <a href="https://docs.fortinet.com/document/fortigate/latest/administration-guide/763058/bgp">FortiGate BGP</a>
+            </p>
+          </article>
+
+          <article id="vendor-huawei" class="vendor-article">
+            <span class="question-map">Question 7; LACP comparison in Questions 5–13</span>
+            <h3>Huawei</h3>
+            <p>Huawei Eth-Trunk LACP selection can maintain currently active members after a preferred member recovers. LACP preemption is the control that allows the higher-priority recovered interface to return to active service, while a preemption delay reduces flapping during unstable recovery. The feature must be configured compatibly on both ends. This is distinct from LACP formation itself: actor/partner system IDs and keys determine aggregation compatibility, while priority and preemption decide which eligible members are active when the configured maximum is lower than the number of available members. STP normally sees the logical Eth-Trunk, so an individual member remaining standby is not evidence that MSTP blocked it.</p>
+            <div class="decision-grid">
+              <div class="decision-box"><h4>Enable preemption when</h4><p>Link priority encodes a real design preference—capacity, optic path, latency, or maintenance intent—and the preferred recovered member should reclaim active state automatically.</p></div>
+              <div class="decision-box"><h4>Leave preemption off when</h4><p>Stability is more valuable than returning to a preferred link and the current active set is fully acceptable. This avoids a second traffic movement after recovery.</p></div>
+              <div class="decision-box"><h4>Use a delay when</h4><p>The recovered physical path may flap or upstream state needs time to settle. The delay trades slightly longer suboptimal placement for a lower risk of repeated LACP churn.</p></div>
+              <div class="decision-box"><h4>Separate the layers</h4><p>Validate actor/partner IDs and keys for eligibility, priorities and maximum-active count for selection, preemption for recovery, and the logical Eth-Trunk in STP and routing.</p></div>
+            </div>
+            <p class="visual-refs"><strong>Official visual reference:</strong> <a href="https://support.huawei.com/enterprise/en/doc/EDOC1100459497/8dafafb8/optional-configuring-lacp-preemption">Huawei LACP preemption workflow and Eth-Trunk member-selection context</a>.</p>
+            <p class="official-article"><strong>Official article:</strong>
+              <a href="https://support.huawei.com/enterprise/en/doc/EDOC1100459497/8dafafb8/optional-configuring-lacp-preemption">Huawei S7700: Configuring LACP Preemption</a>
+            </p>
+          </article>
+
+          <article id="vendor-broadcom" class="vendor-article">
+            <span class="question-map">Question 49; forwarding context in Questions 32–33 and 50</span>
+            <h3>Broadcom</h3>
+            <p>Broadcom switch programming documentation describes ECMP groups whose member selection is driven by a CRC/hash over configured packet fields. The expected unit of balancing is usually a flow, not every packet. This protects ordering but allows one elephant flow to remain on one member. Newer Trident families add resilient or dynamic load-balancing capabilities and telemetry, but the network operating system determines which ASIC functions are exposed. Troubleshooting therefore separates the control-plane route set, the hardware ECMP group, member liveness, selected hash fields, and actual many-flow distribution. A single-flow throughput test cannot prove that four programmed next hops are broken.</p>
+            <div class="decision-grid">
+              <div class="decision-box"><h4>Use per-flow hashing when</h4><p>Packet ordering matters and traffic contains enough independent flows for statistical distribution. This is the normal choice for general ECMP and LAG forwarding.</p></div>
+              <div class="decision-box"><h4>Consider other modes when</h4><p>Resilient hashing is valuable when member changes should remap fewer established flows. Dynamic load balancing can use congestion signals when the exact ASIC and NOS expose it. Per-packet behavior risks reordering.</p></div>
+              <div class="decision-box"><h4>Hardware versus software</h4><p>The routing protocol selects eligible next hops; the NOS programs an ASIC group; the ASIC hashes supported packet fields. Feature availability and hash controls must be verified for the precise chip and software release.</p></div>
+              <div class="decision-box"><h4>Prove distribution correctly</h4><p>Inspect the hardware group and live members, confirm hash inputs, then generate thousands of independent flows. One elephant flow on one member is normal evidence of order-preserving hashing.</p></div>
+            </div>
+            <p class="visual-refs"><strong>Official visual reference:</strong> <a href="https://docs.broadcom.com/doc/56070-PG2-PUB">Broadcom BCM56070 programming-guide ECMP tables and pipeline figures</a>. Use the vendor PDF because ASIC figures are release- and family-specific.</p>
+            <p class="official-article"><strong>Official articles:</strong>
+              <a href="https://docs.broadcom.com/doc/56070-PG2-PUB">BCM56070 Switch Programming Guide: ECMP</a> ·
+              <a href="https://www.broadcom.com/products/ethernet-connectivity/switching/strataxgs/bcm56880-series">Trident4 Programmable Switching</a>
+            </p>
+          </article>
+
+          <article id="vendor-f5" class="vendor-article">
+            <span class="question-map">Question 39</span>
+            <h3>F5</h3>
+            <p>BIG-IP dynamic routing is scoped to route domains. Enabling BGP on a route domain starts the protocol context, but the neighbor still needs TCP/179 reachability to the appropriate self IP. Self-IP service restrictions can allow the SYN to arrive while preventing the BGP connection from completing. F5 also documents an HA nuance: enabled protocol state at runtime is not automatically equivalent to ordinary synchronized configuration state in every procedure. Enable the protocol on the active device using the supported sequence, synchronize as documented, and verify both peers. Virtual-server persistence and pool health monitors operate in a different traffic-processing layer and do not fix the routing daemon's transport session.</p>
+            <div class="decision-grid">
+              <div class="decision-box"><h4>Use route domains when</h4><p>BIG-IP must isolate tenants, overlapping address spaces, or separate routing-policy contexts. Bind VLANs, self IPs, and dynamic routing to the intended route domain and use strict isolation when cross-domain routing is not allowed.</p></div>
+              <div class="decision-box"><h4>Use the default domain when</h4><p>One address space and one routing context are sufficient. Avoiding unnecessary domains reduces object qualification, operational ambiguity, and HA verification steps.</p></div>
+              <div class="decision-box"><h4>Dynamic versus static routing</h4><p>Use BGP when reachability changes and policy must propagate automatically; use static routes for small, stable, deterministic paths. Neither works until the correct self IP, VLAN, and service permissions allow the control session.</p></div>
+              <div class="decision-box"><h4>Do not cross the layers</h4><p>Troubleshoot route-domain selection, self-IP TCP/179, routing-daemon state, RIB/FIB, and HA peer state before virtual-server persistence, pools, NAT, or application health monitors.</p></div>
+            </div>
+            <div class="source-figures"><figure class="source-figure"><a href="https://techdocs.f5.com/kb/en-us/products/big-ip_gtm/manuals/product/gtm-implementations-11-5-0/11.html"><img loading="lazy" referrerpolicy="no-referrer" src="https://techdocs.f5.com/kb/global/manual_images/MAN-0388-04_v1/i_gtm_with_ltm_rds.png" alt="F5 diagram of BIG-IP systems using multiple isolated route domains"></a><figcaption>F5 original: multiple route domains isolate overlapping networks behind the same BIG-IP platform. Open the official article.</figcaption></figure></div>
+            <p class="official-article"><strong>Official article:</strong>
+              <a href="https://techdocs.f5.com/kb/en-us/products/big-ip_ltm/manuals/product/tmos-routing-administration-13-0-0/10.html">BIG-IP TMOS Routing Administration: Dynamic Routing</a>
+            </p>
+          </article>
+
+          <article id="vendor-tplink" class="vendor-article">
+            <span class="question-map">Question 9; MST comparison in Questions 1–2 and 10</span>
+            <h3>TP-Link</h3>
+            <p>TP-Link's MSTP configuration guide states the same core region rule used across standards-compliant implementations: region name, revision, and VLAN-to-instance mapping must match. Multiple VLANs can share one MST instance, while one VLAN maps to only one instance. The Internal Spanning Tree carries VLANs not assigned to another instance and connects regional behavior to the CIST. A port cost or bridge priority difference changes path selection without changing region identity. When deploying MSTP, define the mapping first, validate it across every switch, and only then activate the intended topology; piecemeal mapping changes can temporarily create boundaries and unexpected forwarding paths.</p>
+            <div class="decision-grid">
+              <div class="decision-box"><h4>Use MSTP when</h4><p>Many VLANs can share a small number of forwarding topologies and you need rapid convergence with lower control-plane state than one instance per VLAN.</p></div>
+              <div class="decision-box"><h4>Use RSTP or another boundary when</h4><p>One common topology is sufficient, or the access design is small enough that MST region administration adds more risk than value. Routed access removes spanning tree from inter-switch uplinks entirely.</p></div>
+              <div class="decision-box"><h4>Region versus path design</h4><p>Name, revision, and VLAN mapping define membership. Root priority and port cost define paths after membership. Changing one category never substitutes for correcting the other.</p></div>
+              <div class="decision-box"><h4>Safe migration</h4><p>Prestage identical maps, compare configuration on every bridge, identify boundaries, then move roots and traffic in a controlled window. Test VLANs mapped to every MSTI and the IST.</p></div>
+            </div>
+            <div class="source-figures">
+              <figure class="source-figure"><a href="https://www.tp-link.com/us/configuration-guides/configuring_spanning_tree/"><img loading="lazy" referrerpolicy="no-referrer" src="https://www.tp-link.com/us/configuration-guides/configuring_spanning_tree/configuring_spanning_tree-web-resources/image/4.png" alt="TP-Link MSTP topology with four regions connected by the common spanning tree"></a><figcaption>TP-Link original: the CIST connects separate MST regions. Open the official guide.</figcaption></figure>
+              <figure class="source-figure"><a href="https://www.tp-link.com/us/configuration-guides/configuring_spanning_tree/"><img loading="lazy" referrerpolicy="no-referrer" src="https://www.tp-link.com/us/configuration-guides/configuring_spanning_tree/configuring_spanning_tree-web-resources/image/5.png" alt="TP-Link diagram showing several MST instances with different roots"></a><figcaption>TP-Link original: several VLAN groups can use different roots without one instance per VLAN. Open the official guide.</figcaption></figure>
+            </div>
+            <p class="official-article"><strong>Official article:</strong>
+              <a href="https://www.tp-link.com/us/configuration-guides/configuring_spanning_tree/">TP-Link: Configuring Spanning Tree and MSTP</a>
+            </p>
+          </article>
+
+          <article id="vendor-extreme" class="vendor-article">
+            <span class="question-map">Question 10; multichassis comparison in Questions 3–12</span>
+            <h3>Extreme Networks</h3>
+            <p>Extreme's MST documentation highlights a default that is easy to miss: a switch can derive a unique default region identifier from its MAC address. Two switches with untouched defaults can therefore operate as different regions even though both are running MSTP. Matching explicit region identifiers are required. Extreme's current MLAG guidance also treats split brain as a distinct control problem: when keepalive evidence indicates a peer split, the backup side may shut client ports to prevent inconsistent forwarding, with safeguards for cases where health information itself is incomplete. The design must test control-channel, peer-link, and node-health failures separately.</p>
+            <div class="decision-grid">
+              <div class="decision-box"><h4>Use explicit MST regions when</h4><p>VLANs require several predictable trees across multiple switches. Explicit configuration avoids per-device MAC-derived defaults silently creating boundaries.</p></div>
+              <div class="decision-box"><h4>Use MLAG when</h4><p>Servers or access switches need active links to two Extreme peers with conventional LACP. Keep the ISC/control design independent enough to distinguish link, peer, and path failures.</p></div>
+              <div class="decision-box"><h4>Prefer routed or fabric multihoming when</h4><p>You want to remove pair-specific Layer 2 state and reduce split-brain exposure. The alternative adds routed or EVPN control-plane design but can improve scale and failure isolation.</p></div>
+              <div class="decision-box"><h4>Test the selection logic</h4><p>Validate shared LACP MAC, system and port priorities, balanced member selection, ISC state, checkpoint/keepalive evidence, backup-port shutdown, and restoration after each distinct failure.</p></div>
+            </div>
+            <div class="source-figures"><figure class="source-figure"><a href="https://documentation.extremenetworks.com/switchengine_32.6.3/GUID-D103DBB8-95FF-42E9-AE6B-E78B363841BF.shtml"><img loading="lazy" referrerpolicy="no-referrer" src="https://documentation.extremenetworks.com/switchengine_32.6.3/GUID-C6FD5054-779B-47D3-A6DE-5E505C41E82A-low.png" alt="Extreme Networks diagram of LACP member links balanced across two MLAG peers"></a><figcaption>Extreme original: port priorities distribute active LACP members across both MLAG peers. Open the official article.</figcaption></figure></div>
+            <p class="official-article"><strong>Official articles:</strong>
+              <a href="https://documentation.extremenetworks.com/exos_21.1/GUID-31F381B7-4C0D-4AB2-9821-67530CEF90F1.shtml">ExtremeXOS MSTP Regions</a> ·
+              <a href="https://documentation.extremenetworks.com/Extreme_OS_ONE_Switching_and_Routing_22_2_2_0_Layer2_Configuration_Guide.pdf">Extreme OS ONE Layer 2 and MLAG Guide</a>
+            </p>
+          </article>
+
+          <article id="vendor-checkpoint" class="vendor-article">
+            <span class="question-map">Questions 23, 37, 48</span>
+            <h3>Check Point</h3>
+            <p>Gaia integrates BGP, OSPF, OSPFv3, and RIP with firewall-gateway operation. OSPF can run over a route-based VPN VTI, but adjacency health does not prove redistribution policy. Gaia route maps can control import, export, and redistribution and can take precedence over related Portal configuration. Check Point also documents restrictive default BGP acceptance behavior, so an Established session with received updates can still install no routes until explicit policy permits them. Mutual redistribution should use narrow prefix scope, route provenance tags, return-tag rejection, and defined metric ownership to prevent a prefix from leaving one protocol and re-entering as a seemingly new route.</p>
+            <div class="decision-grid">
+              <div class="decision-box"><h4>Use dynamic routing on Gaia when</h4><p>Firewall clusters must react to changing WAN, VPN, or data-center reachability and routing policy must be explicit. Use OSPF inside one administrative domain and BGP where independent policy or scale requires it.</p></div>
+              <div class="decision-box"><h4>Use static routes when</h4><p>The path set is small, stable, and operationally controlled. Static routing reduces protocol state, but conditional tracking and failover must still prevent a dead next hop from remaining preferred.</p></div>
+              <div class="decision-box"><h4>One policy authority</h4><p>Do not assume a Portal rule overrides an assigned CLI route map. Inventory both surfaces, choose one documented source of truth, then test import, redistribution, and export separately.</p></div>
+              <div class="decision-box"><h4>Redistribution boundary</h4><p>Default-deny prefix filters, tags/communities that record origin, rejection of returning tags, and metric ownership are safer than symmetric “redistribute all” rules at multiple sites.</p></div>
+            </div>
+            <p class="visual-refs"><strong>Official visual references:</strong> <a href="https://sc1.checkpoint.com/documents/R81/WebAdminGuides/EN/CP_R81_Gaia_Advanced_Routing_AdminGuide/Topics-GARG/BGP-Route-Reflection.htm">Check Point BGP route-reflector topology</a> · <a href="https://sc1.checkpoint.com/documents/R81.20/WebAdminGuides/EN/CP_R81.20_Gaia_Advanced_Routing_AdminGuide/Content/Topics-GARG/OSPF-Configuring-in-Gaia-Clish-Areas.htm">Gaia OSPF area design and configuration context</a>.</p>
+            <p class="official-article"><strong>Official articles:</strong>
+              <a href="https://sc1.checkpoint.com/documents/R81.20/WebAdminGuides/EN/CP_R81.20_Gaia_Advanced_Routing_AdminGuide/Content/Topics-GARG/OSPF.htm">Gaia Advanced Routing: OSPF</a> ·
+              <a href="https://sc1.checkpoint.com/documents/R80.30/WebAdminGuides/EN/CP_R80.30_Gaia_Advanced_Routing_AdminGuide/162207.htm">Gaia Routing Policy Configuration</a>
+            </p>
+          </article>
+
+          <article id="vendor-cloudflare" class="vendor-article">
+            <span class="question-map">Question 38; edge convergence comparison in Questions 33 and 41</span>
+            <h3>Cloudflare</h3>
+            <p>Magic Transit can learn customer routes over BGP sessions carried by GRE or IPsec tunnels. The customer device initiates the session, keepalives require a nonzero hold time, and service-specific ASN and prefix limits apply. Current documentation states that BFD is not supported for this service, so legacy tunnel health checks remain an independent and important steering input. BGP session state, learned routes, tunnel reachability, Cloudflare anycast prefix advertisement, and application recovery are separate signals. GRE provides encapsulation without encryption; IPsec adds confidentiality and peer authentication. The documented TCP MD5 option helps prevent accidental BGP misconfiguration but is not presented as a substitute for tunnel encryption.</p>
+            <div class="decision-grid">
+              <div class="decision-box"><h4>GRE versus IPsec</h4><p>Use GRE when simple stateless encapsulation and operational ease are primary and encryption is not required. Use IPsec when confidentiality and authenticated tunnel endpoints are requirements; account for cryptographic and MTU/MSS overhead.</p></div>
+              <div class="decision-box"><h4>BGP versus static routes</h4><p>Use BGP to automate changing prefixes and exploit session recovery across supported tunnels. Use static routes for controlled, stable entries and explicit priority/weight behavior. Current BGP-over-tunnel status must be checked before production use.</p></div>
+              <div class="decision-box"><h4>Health signals are complementary</h4><p>BGP proves the routing session and route exchange; tunnel health checks influence reachability steering; anycast advertisement controls Internet ingress. Current Magic Transit BGP does not support BFD, so do not design around it.</p></div>
+              <div class="decision-box"><h4>Validation chain</h4><p>Confirm tunnel underlay and MSS, customer-initiated TCP session, ASN and timers, learned-route propagation, route priority, health-check action, anycast status, and bidirectional application recovery.</p></div>
+            </div>
+            <p class="visual-refs"><strong>Official live diagrams:</strong> <a href="https://developers.cloudflare.com/magic-transit/reference/gre-ipsec-tunnels/">GRE/IPsec encapsulation sequence</a> · <a href="https://developers.cloudflare.com/magic-transit/reference/traffic-steering/#examples">normal ECMP and two failover topologies</a>. Cloudflare renders these diagrams from source on the article page rather than publishing separate bitmap assets.</p>
+            <p class="official-article"><strong>Official articles:</strong>
+              <a href="https://developers.cloudflare.com/magic-transit/how-to/configure-routes/">Magic Transit: Configure Routes and BGP</a> ·
+              <a href="https://developers.cloudflare.com/magic-transit/reference/traffic-steering/">Magic Transit Traffic Steering</a> ·
+              <a href="https://developers.cloudflare.com/magic-transit/reference/gre-ipsec-tunnels/">GRE and IPsec Tunnels</a>
+            </p>
+          </article>
+        </div>
+      </section>
+
+      <nav class="study-toc" aria-label="Study article contents">
+        <p class="article-kicker">Cross-vendor protocol reinforcement</p>
+        <h2>Protocol primer index</h2>
+        <ol class="toc-grid">
+          <li><a href="#article-mst">1. MST regions and boundaries</a></li>
+          <li><a href="#article-lag">2. LACP and multichassis LAG</a></li>
+          <li><a href="#article-split">3. Split-brain and recovery controls</a></li>
+          <li><a href="#article-ospf-neighbor">4. OSPF adjacency troubleshooting</a></li>
+          <li><a href="#article-ospf-routes">5. OSPF LSAs and external routes</a></li>
+          <li><a href="#article-ospfv3">6. OSPFv3, BFD, and convergence</a></li>
+          <li><a href="#article-bgp-best">7. BGP best path and MED</a></li>
+          <li><a href="#article-bgp-scale">8. BGP next hop, RRs, and multipath</a></li>
+          <li><a href="#article-edge">9. BGP on firewalls and cloud edges</a></li>
+          <li><a href="#article-bgp-policy">10. Aggregation, communities, and GR</a></li>
+          <li><a href="#article-isis">11. IS-IS core design</a></li>
+          <li><a href="#article-distance">12. RIP, EIGRP, and redistribution</a></li>
+          <li><a href="#article-forwarding">13. ECMP, FIBs, and migration safety</a></li>
+        </ol>
+      </nav>
+
+      <article id="article-mst" class="study-article">
+        <p class="article-kicker">Article 1 · Questions 1, 2, 9, 10</p>
+        <h2>MST regions are configuration domains, not automatic trunk groups</h2>
+        <p>Multiple Spanning Tree reduces the number of spanning-tree instances by mapping many VLANs to a smaller set of MST instances. That efficiency depends on every switch in a region agreeing on three identity inputs: region name, revision, and the complete VLAN-to-instance mapping. A one-VLAN mapping difference changes the configuration digest even when the displayed name and revision look correct. The link becomes a region boundary, and the two regions interact through the Common Spanning Tree rather than sharing internal instance state.</p>
+        <div class="article-grid">
+          <div>
+            <h3>Operational consequences</h3>
+            <ul>
+              <li>A VLAN can take an apparently irrational path because its instance has different roots or is represented only through the CIST across a boundary.</li>
+              <li>Bridge priority selects a root; it does not determine region membership.</li>
+              <li>Extreme defaults can leave each switch in a unique region until matching identifiers are configured.</li>
+              <li>Root Guard deliberately places a port into root-inconsistent when a superior BPDU arrives where the root must never appear.</li>
+            </ul>
+          </div>
+          <div>
+            <h3>Safe troubleshooting sequence</h3>
+            <ol>
+              <li>Identify the VLAN and effective MST instance.</li>
+              <li>Compare region name, revision, mapping, and digest on both ends.</li>
+              <li>Check whether the port is internal or boundary and which bridge is root for the CIST and the affected MSTI.</li>
+              <li>Correct the unintended root or region input; do not disable STP to make a blocked path forward.</li>
+            </ol>
+          </div>
+        </div>
+        <div class="callout"><strong>Memory model:</strong> region identity answers “who shares the topology database?” Root priority answers “who wins inside that topology?” Treat them as separate questions.</div>
+        <p class="sources"><strong>Official reading:</strong>
+          <a href="https://www.cisco.com/c/en/us/support/docs/lan-switching/spanning-tree-protocol/24248-147.html">Cisco MSTP</a>
+          <a href="https://www.tp-link.com/us/configuration-guides/configuring_spanning_tree/">TP-Link MSTP</a>
+          <a href="https://documentation.extremenetworks.com/exos_21.1/GUID-31F381B7-4C0D-4AB2-9821-67530CEF90F1.shtml">Extreme MST regions</a>
+        </p>
+      </article>
+
+      <article id="article-lag" class="study-article">
+        <p class="article-kicker">Article 2 · Questions 3–5, 12–13</p>
+        <h2>LACP, hashing, and multichassis state have different jobs</h2>
+        <p>A standard LAG makes several physical links look like one logical interface. LACP validates that members belong to compatible actors and aggregators; it does not stripe every packet across every member. Most platforms select a member with a per-flow hash so packets in one flow remain ordered. Four 10-Gbps links therefore provide roughly 40 Gbps of aggregate capacity across many flows, while one ordinary flow may remain limited to one 10-Gbps member.</p>
+        <p>Multichassis designs add node redundancy, but they also add control channels. Juniper MC-LAG uses ICCP to exchange control and operational state and an ICL to carry data between peers. An up ICL does not prove ICCP is healthy. Arista MLAG similarly depends on its peer link and peer liveness; reload delay can hold downstream links until routing and neighbor state are ready. Cisco vPC distinguishes dual-attached vPC members from single-attached orphan ports. An orphan may need explicit suspend behavior during a peer-link failure. Aruba VSX uses an ISL plus keepalive and offers split controls for applicable non-MCLAG interfaces.</p>
+        <div class="article-grid">
+          <div>
+            <h3>Evidence to separate</h3>
+            <ul>
+              <li>Physical link: carrier, errors, MTU, optics.</li>
+              <li>LACP member: actor/partner system ID, key, collecting/distributing state.</li>
+              <li>Peer control: ICCP, keepalive, consistency checks, peer role.</li>
+              <li>Peer data: ICL/peer-link forwarding and VLAN allowance.</li>
+            </ul>
+          </div>
+          <div>
+            <h3>Failure-timeline discipline</h3>
+            <p>Record peer detection, member suspension, routing recovery, ARP/ND or MAC synchronization, downstream admission, and application recovery separately. A link that comes up before Layer 3 state is ready can create a short but real blackhole.</p>
+          </div>
+        </div>
+        <p class="sources"><strong>Official reading:</strong>
+          <a href="https://www.juniper.net/documentation/us/en/software/junos/mc-lag/topics/concept/mc-lag-feature-summary-best-practices.html">Juniper MC-LAG</a>
+          <a href="https://www.arista.com/en/um-eos/eos-multi-chassis-link-aggregation">Arista MLAG</a>
+          <a href="https://www.cisco.com/c/en/us/td/docs/dcn/nx-os/nexus9000/105x/configuration/interfaces/cisco-nexus-9000-series-nx-os-interfaces-configuration-guide-release-105x/m_configuring_vpcs_9x.html">Cisco vPC</a>
+          <a href="https://www.arubanetworks.com/techdocs/AOS-CX/10.08/PDF/vsx.pdf">Aruba VSX</a>
+        </p>
+      </article>
+
+      <article id="article-split" class="study-article">
+        <p class="article-kicker">Article 3 · Questions 6–8, 11</p>
+        <h2>Split-brain protection must survive the failure it is meant to detect</h2>
+        <p>When two devices present one logical system, loss of the inter-device fabric can leave both halves believing they are active. Duplicate gateway addresses, bridge MACs, LACP actors, and routing state can then cause loops or blackholes. A split detector must use sufficiently independent evidence and must have a deterministic loser.</p>
+        <div class="article-grid">
+          <div>
+            <h3>Vendor examples</h3>
+            <ul>
+              <li><strong>FortiSwitch:</strong> MCLAG split-brain detection can make one peer dormant. Configured priority decides first; equal priority falls back to numerical MAC behavior documented for the release.</li>
+              <li><strong>HPE Comware:</strong> IRF Multi-Active Detection can use BFD, LACP, ARP, or ND mechanisms depending on platform. MAD places a losing fabric into recovery and prevents duplicate active forwarding.</li>
+              <li><strong>Huawei:</strong> LACP preemption controls whether a recovered, more-preferred Eth-Trunk member replaces a currently active member. A preemption delay reduces churn.</li>
+              <li><strong>Nokia SR OS:</strong> LAG thresholds can change IGP cost or operational state as capacity degrades.</li>
+            </ul>
+          </div>
+          <div>
+            <h3>Design questions</h3>
+            <ul>
+              <li>Does detection share the same conduit as the failed fabric?</li>
+              <li>Which node loses, and are downstream ports, SVIs, and routed interfaces treated consistently?</li>
+              <li>Does partial degradation merely reduce capacity, raise routing cost, or declare the entire LAG down?</li>
+              <li>Which configured cost wins when a dynamic degradation action and explicit IGP cost coexist?</li>
+            </ul>
+          </div>
+        </div>
+        <div class="callout"><strong>Production rule:</strong> never test split brain with only control-plane pings. Drive bidirectional traffic and confirm which exact interfaces and gateways remain active.</div>
+        <p class="sources"><strong>Official reading:</strong>
+          <a href="https://docs.fortinet.com/document/fortiswitch/7.2.0/administration-guide/860027/mclag">FortiSwitch MCLAG</a>
+          <a href="https://support.hpe.com/hpesc/public/docDisplay?docId=sf000097018en_us">HPE BFD MAD</a>
+          <a href="https://support.huawei.com/enterprise/en/doc/EDOC1100459497/8dafafb8/optional-configuring-lacp-preemption">Huawei LACP preemption</a>
+          <a href="https://documentation.nokia.com/sr/26-7/7750-sr/books/interface-configuration/lag.html">Nokia LAG thresholds</a>
+        </p>
+      </article>
+
+      <article id="article-ospf-neighbor" class="study-article">
+        <p class="article-kicker">Article 4 · Questions 14–17</p>
+        <h2>OSPF adjacency state tells you which exchange failed</h2>
+        <p>Do not treat “OSPF is down” as one failure. Down or Init points toward missing or one-way Hellos. A neighbor that reaches 2-WAY has bidirectional Hello visibility. On a broadcast segment, two DROTHERs normally stay 2-WAY and form full adjacencies only with the DR and BDR. EXSTART or EXCHANGE means the routers discovered each other but cannot complete Database Description negotiation or exchange.</p>
+        <p>MTU mismatch is a classic inter-vendor EXSTART cause because the larger interface MTU appears in DBD packets. Matching the real data-plane MTU is preferable to globally hiding the check. Other DBD failures include unicast reachability, filtering, sequence problems, or duplicate router IDs. A duplicate router ID is more than a cosmetic log: LSAs use the advertising router identity, so duplicate ASBR IDs can create external-LSA flood wars.</p>
+        <div class="article-grid">
+          <div>
+            <h3>Hello compatibility</h3>
+            <p>Compare area, Hello/dead intervals, authentication, stub flags/options, subnet/network type where applicable, and passive state. A capture of both directions is more valuable than one router's configuration alone.</p>
+          </div>
+          <div>
+            <h3>Exchange compatibility</h3>
+            <p>At EXSTART/EXCHANGE, check interface MTU and successful DBD/LSR/LSU transmission. Use large do-not-fragment tests where meaningful. Do not jump immediately to route policy; the LSDB has not synchronized yet.</p>
+          </div>
+        </div>
+        <p class="sources"><strong>Official reading:</strong>
+          <a href="https://www.cisco.com/c/en/us/support/docs/ip/open-shortest-path-first-ospf/13684-12.html">Cisco EXSTART troubleshooting</a>
+          <a href="https://www.cisco.com/c/en/us/support/docs/ip/open-shortest-path-first-ospf/23862-duplicate-router-id-ospf.html">Cisco duplicate router IDs</a>
+          <a href="https://datatracker.ietf.org/doc/html/rfc2328">RFC 2328</a>
+        </p>
+      </article>
+
+      <article id="article-ospf-routes" class="study-article">
+        <p class="article-kicker">Article 5 · Questions 18–20, 23–25</p>
+        <h2>An OSPF LSA in the database is not automatically an installed route</h2>
+        <p>Route installation follows topology and resolution rules after flooding. Type-1 and Type-2 LSAs describe an area's topology. ABRs originate Type-3 summaries between areas and Type-4 reachability toward ASBRs. ASBRs originate Type-5 externals, while an NSSA ASBR originates Type-7 and an elected NSSA translator ABR produces eligible Type-5 advertisements for the rest of the domain.</p>
+        <p>External Type-1 metrics add the internal cost to the external metric. Type-2 prefers the external metric first and uses internal reachability as a tie-break. A nonzero forwarding address tells routers to forward toward that address rather than automatically toward the ASBR; failure to resolve it can prevent route installation even when the ASBR itself is reachable. Inter-area summary configuration belongs on the ABR, not merely on a router that redistributes routes. Conditional default origination should withdraw when the qualifying local route disappears, preventing a dead exit from continuing to attract traffic.</p>
+        <div class="callout"><strong>Four checks:</strong> Is the LSA present? Is the advertising router or forwarding address reachable? Does the path win the protocol calculation? Did the RIB and then the FIB accept it?</div>
+        <p>On Check Point Gaia, protocol route maps can override corresponding Portal filtering or redistribution configuration. A healthy OSPF-over-VTI adjacency therefore proves the transport and neighbor state, not that an export policy permits the prefix.</p>
+        <p class="sources"><strong>Official reading:</strong>
+          <a href="https://datatracker.ietf.org/doc/html/rfc2328">RFC 2328 OSPF</a>
+          <a href="https://datatracker.ietf.org/doc/html/rfc3101">RFC 3101 NSSA</a>
+          <a href="https://sc1.checkpoint.com/documents/SMB_R80.20.X/Dynamic_Routing/EN/Content/Topics/Route-Maps.htm">Check Point route maps</a>
+        </p>
+      </article>
+
+      <article id="article-ospfv3" class="study-article">
+        <p class="article-kicker">Article 6 · Questions 21–22, 33</p>
+        <h2>OSPFv3 runs per link; BFD accelerates detection, not every recovery phase</h2>
+        <p>OSPFv3 retains familiar neighbor, flooding, DR election, area, and SPF concepts while separating topology from IPv6 prefix information more cleanly. Neighbors communicate with link-local addresses and form adjacency on a link. Different global prefixes do not by themselves prevent a link-local adjacency, although they may still reveal an addressing design error.</p>
+        <p>BFD supplies rapid liveness detection to a client protocol. When BFD declares Down, OSPF reacts, runs the necessary topology calculation, changes the RIB, and programs the FIB. Existing sessions or applications may then need their own retry or reconnection. Those stages have different clocks:</p>
+        <ol>
+          <li>Failure begins.</li>
+          <li>BFD or the routing protocol detects it.</li>
+          <li>The routing protocol withdraws/recalculates.</li>
+          <li>The RIB selects and the FIB programs an alternate.</li>
+          <li>Stateful devices and applications recover.</li>
+        </ol>
+        <div class="callout"><strong>Interview trap:</strong> “BFD converged in 300 ms” is incomplete unless the measurement identifies whether 300 ms describes detection, routing, forwarding, or application recovery.</div>
+        <p class="sources"><strong>Official reading:</strong>
+          <a href="https://www.arista.com/en/um-eos/eos-open-shortest-path-first-version-3">Arista OSPFv3</a>
+          <a href="https://datatracker.ietf.org/doc/html/rfc5340">RFC 5340</a>
+          <a href="https://datatracker.ietf.org/doc/html/rfc5880">RFC 5880 BFD</a>
+        </p>
+      </article>
+
+      <article id="article-bgp-best" class="study-article">
+        <p class="article-kicker">Article 7 · Questions 26–28, 35</p>
+        <h2>BGP chooses policy first, then progressively narrower tie-breakers</h2>
+        <p>BGP does not select the geographically shortest path. It applies an ordered policy decision to valid, resolvable candidates. Exact ordering varies by implementation, but common early controls include vendor-local weight, LOCAL_PREF, local origination, AS_PATH length, ORIGIN, and MED before later eBGP/iBGP, IGP-next-hop cost, age, router ID, cluster length, or neighbor-address tie-breakers. This order explains why a longer AS path can win when its LOCAL_PREF is higher.</p>
+        <p>MED is deliberately subtle. Default behavior commonly compares MED among routes from the same neighboring AS. <strong>Deterministic MED</strong> groups paths by neighboring AS and makes comparison within each group repeatable. <strong>Always compare MED</strong> makes MED comparable across different neighboring ASes. These knobs solve different problems and can produce network-wide changes if deployed inconsistently.</p>
+        <p>AS-path prepending is an outbound advertisement technique used to make one external path look longer to remote networks. It is a hint, not a guarantee: remote LOCAL_PREF or other policy can dominate it. To influence the local enterprise's outbound choice, use an appropriate inbound policy such as LOCAL_PREF rather than prepending received routes without a clear model.</p>
+        <p class="sources"><strong>Official reading:</strong>
+          <a href="https://www.cisco.com/c/en/us/support/docs/ip/border-gateway-protocol-bgp/13753-25.html">Cisco BGP best path</a>
+          <a href="https://www.juniper.net/documentation/us/en/software/junos/bgp/topics/topic-map/basic-routing-policies.html">Juniper BGP policy</a>
+          <a href="https://datatracker.ietf.org/doc/html/rfc4271">RFC 4271</a>
+        </p>
+      </article>
+
+      <article id="article-bgp-scale" class="study-article">
+        <p class="article-kicker">Article 8 · Questions 29–32, 40, 42</p>
+        <h2>Received, valid, best, installed, and advertised are different BGP states</h2>
+        <p>An update can be received yet rejected by policy. A permitted path can remain invalid because its protocol next hop does not resolve. A valid path can lose best-path selection. A best path can fail RIB installation because another source wins or because recursion fails. An installed route can still be absent from hardware during a programming fault. Finally, a best path is advertised only when outbound policy and protocol rules permit it.</p>
+        <div class="article-grid">
+          <div>
+            <h3>Next hop and policy</h3>
+            <p>iBGP normally preserves an eBGP-learned next hop. The core must either carry that external next hop or the edge must intentionally set next-hop self. Junos exact prefix matches do not automatically include more-specifics; prefix-length policy must state the range.</p>
+          </div>
+          <div>
+            <h3>Route reflection and multipath</h3>
+            <p>A route reflector normally selects one best path from its own IGP position. ORR, add-path, or topology-aware placement can expose a better client choice. ORIGINATOR_ID and CLUSTER_LIST prevent reflection loops. Multipath does not remove best-path selection: candidates must satisfy implementation-specific equivalence before more than one path enters the RIB/FIB.</p>
+          </div>
+        </div>
+        <div class="callout"><strong>Debug order:</strong> received → policy accepted → next hop resolved → best → RIB installed → FIB programmed → advertised. Never use one stage as proof of the next.</div>
+        <p class="sources"><strong>Official reading:</strong>
+          <a href="https://www.juniper.net/documentation/us/en/software/junos/bgp/topics/topic-map/bgp-overview.html">Juniper BGP resolution</a>
+          <a href="https://www.cisco.com/c/en/us/support/docs/ip/border-gateway-protocol-bgp/212881-border-gateway-protocol-bgp-optimal-ro.html">Cisco ORR</a>
+          <a href="https://datatracker.ietf.org/doc/html/rfc4456">RFC 4456 route reflection</a>
+          <a href="https://docs.fortinet.com/document/fortigate/latest/administration-guide/763058/bgp">FortiGate BGP</a>
+        </p>
+      </article>
+
+      <article id="article-edge" class="study-article">
+        <p class="article-kicker">Article 9 · Questions 37–40</p>
+        <h2>BGP on firewalls and cloud edges adds platform-specific admission gates</h2>
+        <p>Protocol theory is portable, but implementation gates matter. On Check Point Gaia, an Established session with received updates does not guarantee acceptance; explicit inbound policy may be required and CLI route maps can take precedence over related Portal rules. On BIG-IP, the routing protocol is enabled per route domain and the relevant self IP must permit TCP/179. HA configuration synchronization does not mean every runtime routing state transition happened identically, so active and standby state must be checked independently.</p>
+        <p>On FortiGate, use BGP path output together with a route-table lookup for the protocol next hop. Firewall policy and NAT cannot repair an unresolved BGP next hop because the route is not yet eligible for forwarding. On Cloudflare Magic Transit BGP over GRE/IPsec, current service rules include CPE-initiated sessions, nonzero hold time, service-specific ASN constraints, and no BFD support; tunnel health checks remain a separate traffic-steering input. The BGP session, underlay tunnel, tunnel health monitor, learned route, and anycast prefix advertisement are not one state.</p>
+        <div class="callout"><strong>Security note:</strong> TCP MD5 on a BGP session is a protocol authentication control with documented limitations; it does not encrypt GRE traffic. Use IPsec when encryption is required.</div>
+        <p class="sources"><strong>Official reading:</strong>
+          <a href="https://sc1.checkpoint.com/documents/R80.30/WebAdminGuides/EN/CP_R80.30_Gaia_Advanced_Routing_AdminGuide/162207.htm">Check Point routing policy</a>
+          <a href="https://techdocs.f5.com/kb/en-us/products/big-ip_ltm/manuals/product/tmos-routing-administration-13-0-0/10.html">F5 dynamic routing</a>
+          <a href="https://docs.fortinet.com/document/fortigate/latest/administration-guide/763058/bgp">Fortinet BGP</a>
+          <a href="https://developers.cloudflare.com/magic-transit/how-to/configure-routes/">Cloudflare Magic Transit BGP</a>
+        </p>
+      </article>
+
+      <article id="article-bgp-policy" class="study-article">
+        <p class="article-kicker">Article 10 · Questions 34–36, 41</p>
+        <h2>Aggregation, communities, and Graceful Restart trade precision for scale or continuity</h2>
+        <p>A useful aggregate should have a defined dependency on component routes. If an unconditional discard route keeps an aggregate advertised after all real components disappear, the network continues attracting traffic it cannot deliver. Protocol-aware aggregation with specific-route suppression can reduce table size while withdrawing when no contributors remain. A discard route may still be needed to prevent loops, but its advertisement conditions must be intentional.</p>
+        <p>Communities attach policy meaning without changing the NLRI. NO_EXPORT limits advertisement beyond the AS or confederation boundary; it does not automatically remove the route from the local RIB or set LOCAL_PREF. Operators must preserve communities across the sessions where downstream policy needs them.</p>
+        <p>Graceful Restart lets a helper temporarily retain stale routes while a peer's control plane restarts. That is safe only if the restarting system continues forwarding or another mechanism prevents traffic from using a dead path. If forwarding state is lost, stale retention can turn a short control-plane restart into a blackhole. Validate GR and nonstop-forwarding behavior for the exact platform and failure type.</p>
+        <p class="sources"><strong>Official reading:</strong>
+          <a href="https://datatracker.ietf.org/doc/html/rfc4271">RFC 4271 aggregation</a>
+          <a href="https://datatracker.ietf.org/doc/html/rfc1997">RFC 1997 communities</a>
+          <a href="https://www.arista.com/en/um-eos/eos-smart-system-upgrade">Arista Graceful Restart guidance</a>
+        </p>
+      </article>
+
+      <article id="article-isis" class="study-article">
+        <p class="article-kicker">Article 11 · Questions 43–45</p>
+        <h2>IS-IS separates intra-area detail from inter-area reachability</h2>
+        <p>Level 1 routers know their own area. Level 2 routers form the inter-area backbone, and L1/L2 routers connect the levels. An L1 router commonly follows a default toward an L1/L2 router advertising the attached bit. That default is only useful if the L1/L2 router still has working Level 2 reachability. A backbone failure can therefore create a dead-end default unless overload, attached-bit, or default-origination behavior tracks the failure correctly.</p>
+        <p>As with OSPF and BGP, an adjacency and LSDB entry do not guarantee a usable route. Address-family capability, topology, policy, routing-instance membership, recursive resolution, and RIB preference still matter. A route present in the IS-IS database may be inactive because the next hop exists only in another VRF.</p>
+        <p>Nokia SR OS can connect LAG degradation to IS-IS cost. A staged design can make a partially failed bundle less preferred before a lower threshold takes the logical LAG down. Because explicit IGP cost and dynamic threshold cost can have defined precedence, test the effective metric rather than assuming that configuration presence equals activation.</p>
+        <p class="sources"><strong>Official reading:</strong>
+          <a href="https://datatracker.ietf.org/doc/html/rfc1195">RFC 1195 Integrated IS-IS</a>
+          <a href="https://documentation.nokia.com/sr/25-10/7750-sr/books/services-configuration-reference/show-commands.html">Nokia protocol show commands</a>
+          <a href="https://www.juniper.net/documentation/us/en/software/junos/routing-overview/topics/concept/routing-instances-overview.html">Juniper routing instances</a>
+        </p>
+      </article>
+
+      <article id="article-distance" class="study-article">
+        <p class="article-kicker">Article 12 · Questions 46–48</p>
+        <h2>Distance-vector failures are about information scope and provenance</h2>
+        <p>RIP uses hop count and treats 16 as infinity. After a failure, a loop can produce the visible count-to-infinity sequence as routers repeatedly believe a neighbor has a path. Split horizon, poison reverse, triggered updates, and hold-down behavior reduce exposure, but the small metric ceiling and periodic update model limit scale.</p>
+        <p>EIGRP's DUAL provides loop-free computation, yet a route can remain Active when a router queries a large domain and does not receive all replies before the active timer expires. Stubs and summarization create query boundaries: a leaf that cannot provide transit reachability should not be asked to search hundreds of downstream paths.</p>
+        <p>Mutual redistribution creates a different loop. A prefix learned from OSPF can enter BGP at site A, return to OSPF at site B, and compete with its original route. Control it with explicit default-deny prefix policy, provenance tags or communities, rejection of returning tags, and documented ownership/metric rules. Test normal, single-exit failure, inter-site partition, and recovery; a design that works only while every link is up is incomplete.</p>
+        <p class="sources"><strong>Official reading:</strong>
+          <a href="https://datatracker.ietf.org/doc/html/rfc2453">RFC 2453 RIPv2</a>
+          <a href="https://datatracker.ietf.org/doc/html/rfc7868">RFC 7868 EIGRP</a>
+          <a href="https://sc1.checkpoint.com/documents/R80.30/WebAdminGuides/EN/CP_R80.30_Gaia_Advanced_Routing_AdminGuide/162207.htm">Check Point route policy</a>
+        </p>
+      </article>
+
+      <article id="article-forwarding" class="study-article">
+        <p class="article-kicker">Article 13 · Questions 49–50</p>
+        <h2>Hardware forwarding and stateful paths decide whether control-plane success matters</h2>
+        <p>Broadcom switching silicon and network operating systems can program an ECMP group with several equal next hops, then select one next hop with a hash over packet fields. A healthy group can balance thousands of flows well while one elephant flow stays on one path. Before declaring ECMP broken, verify the hardware group, member state, hash inputs, and a many-flow test. Resilient hashing reduces unnecessary remapping after membership changes; dynamic load balancing may use additional congestion signals when supported by the exact ASIC and NOS.</p>
+        <p>Migration troubleshooting must distinguish the RIB from the FIB and both from stateful session ownership. Adjacencies can be Full and routes can be correct on the new core while return traffic still follows the old firewall. Different stateful devices see opposite halves of the flow, so neither has a complete session or consistent NAT state. The safest response is normally to pause or roll back the gateway cut, restore symmetry, and prove the bidirectional packet walk before expanding the change.</p>
+        <div class="article-grid">
+          <div>
+            <h3>Cutover gates</h3>
+            <ul>
+              <li>Control plane: neighbor and route policy.</li>
+              <li>RIB/FIB: selected and programmed next hop.</li>
+              <li>Services: ARP/ND, MAC, NAT, security policy, and session sync.</li>
+              <li>Application: DNS, retries, persistence, and actual transaction success.</li>
+            </ul>
+          </div>
+          <div>
+            <h3>Rollback trigger</h3>
+            <p>Define a measurable threshold before the change. “Routing looks fine” is not a success criterion when packets, sessions, or applications disagree.</p>
+          </div>
+        </div>
+        <p class="sources"><strong>Official reading:</strong>
+          <a href="https://docs.broadcom.com/doc/56070-PG2-PUB">Broadcom ECMP programming guide</a>
+          <a href="https://www.broadcom.com/products/ethernet-connectivity/switching/strataxgs/bcm56880-series">Broadcom Trident4 forwarding</a>
+          <a href="https://www.cisco.com/c/en/us/support/docs/ip/border-gateway-protocol-bgp/15986-admin-distance.html">Cisco RIB selection and recursion</a>
+        </p>
+      </article>
+    </section>
+
+    <section id="quiz" class="quiz-intro" aria-labelledby="quiz-title">
+      <p class="article-kicker">Part II · Apply the material</p>
+      <h2 id="quiz-title">50-question scenario quiz</h2>
+      <p>All 50 questions are expanded below on this page. Choose every answer, then use the single <strong>Submit Exam</strong> button after Question 50. Submission scores the complete exam and reveals the design rationale, alternative tradeoff, operational verification, and official source for every item.</p>
+    </section>
+    <section id="report" class="report" aria-live="polite"></section>
+    <form id="examForm" novalidate>
+      <div class="exam-status" aria-live="polite">
+        <strong id="answered">0 / 50 answered</strong>
+        <div class="progress-track" aria-hidden="true"><div id="progressBar" class="progress-bar"></div></div>
+        <a href="#submit-panel">Go to final submit ↓</a>
+      </div>
+      <section id="allQuestions" class="all-questions" aria-label="All 50 exam questions"></section>
+      <section id="submit-panel" class="submit-panel" aria-labelledby="submit-title">
+        <p class="article-kicker">End of exam · One submission</p>
+        <h2 id="submit-title">Submit all 50 answers</h2>
+        <p id="submitNote">Your complete score and every explanation will appear only after submission. Unanswered items count as incorrect.</p>
+        <div class="actions">
+          <button id="submitExam" class="primary" type="submit">Submit Exam</button>
+          <button id="printExam" class="secondary" type="button">Print</button>
+          <button id="resetExam" type="button">Reset all answers</button>
+        </div>
+      </section>
+    </form>
+  </main>
+
+  <footer>
+    <div class="wrap">Prepared September 3, 2026 at 18:29 PST · Verify feature support and syntax against the exact platform and release before production use.</div>
+  </footer>
+
+  <script>
+  "use strict";
+  const questions = [
+    {
+      id: 1, domain: "Layer 2", vendor: "Cisco", difficulty: "Expert", type: "single",
+      prompt: "Three Catalyst switches are intended to share one MST region. VLAN 30 takes an unexpected path through the CIST even though every switch shows the same region name and revision. What is the most likely root cause?",
+      exhibit: "SW1# show spanning-tree mst configuration\\nName [CAMPUS]  Revision 7\\nInstance 1 vlans mapped: 10-29\\nInstance 2 vlans mapped: 30-99\\n\\nSW2# show spanning-tree mst configuration\\nName [CAMPUS]  Revision 7\\nInstance 1 vlans mapped: 10-30\\nInstance 2 vlans mapped: 31-99",
+      options: ["The CIST ignores VLAN-to-instance mappings after revision 1", "The switches require identical bridge priorities to join a region", "The VLAN-to-instance mapping difference produces a different configuration digest, creating a region boundary", "VLAN 30 must be placed only in MST instance 0"],
+      answer: [2],
+      explanation: "MST region membership depends on the configuration name, revision, and complete VLAN-to-instance mapping. The displayed name and revision match, but the mappings do not, so the digest differs and the link behaves as a region boundary.",
+      distractors: "Bridge priority affects root election, not region identity. MST supports nonzero instances. The mapping is part of the region configuration at every revision.",
+      verify: "Compare the full MST configuration and digest on both ends, correct the mapping during a controlled change, then confirm both switches report the same region/digest.",
+      sourceTitle: "Cisco — Understand Multiple Spanning Tree Protocol (802.1s)",
+      sourceUrl: "https://www.cisco.com/c/en/us/support/docs/lan-switching/spanning-tree-protocol/24248-147.html"
+    },
+    {
+      id: 2, domain: "Layer 2", vendor: "Cisco", difficulty: "Advanced", type: "single",
+      prompt: "An access switch uplink enters root-inconsistent immediately after a distribution change. The design states that the distribution pair must remain the STP root. What is the safest production correction?",
+      exhibit: "Access-4# show spanning-tree inconsistentports\\nName                 Interface              Inconsistency\\nVLAN0010              Gi1/0/48               Root Inconsistent\\n\\nChange record: a replacement switch was introduced upstream with priority 0.",
+      options: ["Correct the unintended superior-root priority upstream and retain Root Guard on the access-facing boundary", "Disable spanning tree on Gi1/0/48 so traffic resumes", "Configure PortFast trunk on both ends of the uplink", "Increase the access switch priority to 61440"],
+      answer: [0],
+      explanation: "Root Guard is doing its job: it blocks a port that receives a superior BPDU where the root should never appear. Restore the intended root placement rather than suppressing the protection.",
+      distractors: "Disabling STP risks a loop. PortFast does not solve superior BPDU reception. Raising the access switch numerical priority makes it less likely to become root and does not stop the unexpected superior BPDU.",
+      verify: "Identify the superior BPDU source and bridge ID, fix the upstream priority, and confirm the port automatically leaves root-inconsistent.",
+      sourceTitle: "Cisco — Spanning Tree Protocol support documentation",
+      sourceUrl: "https://www.cisco.com/c/en/us/support/lan-switching/spanning-tree-protocol/products-configuration-examples-list.html"
+    },
+    {
+      id: 3, domain: "Layer 2", vendor: "Aruba", difficulty: "Architect", type: "single",
+      prompt: "An AOS-CX VSX pair uses active gateway on downstream SVIs. The ISL fails while keepalive remains reachable. Which design control most directly prevents selected non-MCLAG Layer 3 interfaces from remaining active on both peers during a split?",
+      exhibit: "switch# show vsx status\\nISL channel: down\\nKeepalive: established\\nConfig sync: out-of-sync\\n\\nAffected interface: vlan 310 (not a member of an MCLAG)",
+      options: ["Enable loop protection only on the access ports", "Configure vsx-shutdown-on-split on the applicable non-MCLAG interface", "Remove the VSX active-gateway MAC", "Change MSTP to RPVST"],
+      answer: [1],
+      explanation: "VSX shutdown-on-split is designed to shut applicable non-MCLAG interfaces when a split is detected. It limits dual-active forwarding exposure while the keepalive distinguishes peer reachability from ISL state.",
+      distractors: "Changing STP mode does not resolve a VSX control-plane split. Removing active gateway changes the forwarding design. Access-loop protection is not the split-brain control for the affected Layer 3 interface.",
+      verify: "Confirm the interface supports and has shutdown-on-split enabled, then test the documented failure sequence in a maintenance window.",
+      sourceTitle: "Aruba AOS-CX — VSX interface attributes",
+      sourceUrl: "https://developer.arubanetworks.com/aoscx/reference/put_system-interfaces-interface-name"
+    },
+    {
+      id: 4, domain: "Layer 2", vendor: "Arista", difficulty: "Expert", type: "single",
+      prompt: "After an MLAG peer reload, downstream port-channels become active before OSPF state and ARP synchronization stabilize, causing a short blackhole. Which MLAG mechanism is intended to control this sequence?",
+      exhibit: "Leaf-2# show mlag\\nstate                 : active\\npeer-link status      : up\\nreload-delay          : 0 sec\\nreload-delay non-mlag : 0 sec\\n\\nTimeline: peer-link up at T+8s; downstream links forward at T+9s; OSPF Full at T+24s.",
+      options: ["Configure an appropriate MLAG reload delay so non-peer links wait for control and forwarding state to stabilize", "Shorten the MLAG heartbeat until it is below the OSPF hello interval", "Disable LACP on all downstream port-channels", "Set every VLAN as the STP root on the reloading peer"],
+      answer: [0],
+      explanation: "MLAG reload delay intentionally holds non-peer links down after a reload, giving routing, multicast, and neighbor state time to recover before attached traffic is admitted.",
+      distractors: "Heartbeat controls peer failure detection, not post-reload admission sequencing. Static bundling removes LACP safeguards. STP root placement does not guarantee Layer 3 readiness.",
+      verify: "Set a platform-appropriate reload delay, repeat a peer reload test, and compare downstream-up, adjacency-full, ARP-sync, and application-recovery timestamps.",
+      sourceTitle: "Arista EOS — Multi-Chassis Link Aggregation",
+      sourceUrl: "https://www.arista.com/en/um-eos/eos-multi-chassis-link-aggregation"
+    },
+    {
+      id: 5, domain: "Layer 2", vendor: "Juniper", difficulty: "Expert", type: "single",
+      prompt: "A Junos MC-LAG has an operational interchassis data link, but each peer reports stale member state and inconsistent LACP parameters after a routing change. Which dependency should be investigated first?",
+      exhibit: "Peer A: ICL up; ICCP session down\\nPeer B: ICL up; ICCP session down\\nClient LAG: collecting on A, individual on B\\nRecent change: management/routing policy modified TCP reachability between peer loopbacks.",
+      options: ["The client must run STP instead of LACP", "The ICL must use an unnumbered OSPF interface", "ICCP reachability and TCP session between the MC-LAG peers", "The service ID must match the client system priority"],
+      answer: [2],
+      explanation: "The ICL carries data, while ICCP exchanges MC-LAG control information and operational state. An up ICL does not compensate for a down ICCP session.",
+      distractors: "The client normally uses LACP. OSPF is not intrinsically required on the ICL. The service identifier is an MC-LAG dependency but is not derived from client system priority and does not explain the reported ICCP loss.",
+      verify: "Test routed reachability between ICCP endpoints, inspect the ICCP TCP session and policy, then validate synchronized member and LACP state.",
+      sourceTitle: "Juniper — Understanding Multichassis Link Aggregation Groups",
+      sourceUrl: "https://www.juniper.net/documentation/us/en/software/junos/mc-lag/topics/concept/mc-lag-feature-summary-best-practices.html"
+    },
+    {
+      id: 6, domain: "Layer 2", vendor: "Fortinet", difficulty: "Expert", type: "single",
+      prompt: "A FortiSwitch MCLAG pair loses its ICL while both switches remain otherwise reachable. Split-brain detection is enabled and both peers retain the default priority. Which peer is expected to become dormant?",
+      exhibit: "config switch global\\n    set mclag-split-brain-detect enable\\nend\\n\\nPeer A switch MAC: 00:09:0f:10:00:01\\nPeer B switch MAC: 00:09:0f:10:00:02\\nPriorities: both 50",
+      options: ["Peer B, because the higher MAC loses the election", "Peer A, because equal priorities fall back to the lowest numerical MAC", "Neither; detection only generates a log", "Both peers until LACP is manually cleared"],
+      answer: [1],
+      explanation: "With equal split-brain priorities, FortiSwitch uses the numerical MAC tie-breaker and the peer with the lower numerical MAC becomes dormant.",
+      distractors: "Detection takes forwarding action, not logging only. It does not intentionally make both peers dormant. The fallback selects the lower, not higher, MAC.",
+      verify: "Use diagnose switch mclag icl and diagnose switch mclag list, and confirm which peer transitions during a controlled ICL-failure test.",
+      sourceTitle: "Fortinet — FortiSwitch MCLAG",
+      sourceUrl: "https://docs.fortinet.com/document/fortiswitch/7.2.0/administration-guide/860027/mclag"
+    },
+    {
+      id: 7, domain: "Layer 2", vendor: "Huawei", difficulty: "Advanced", type: "single",
+      prompt: "A preferred high-priority Huawei Eth-Trunk member recovers, but the currently active lower-priority member continues forwarding indefinitely. No faults remain. What explains the behavior?",
+      exhibit: "Eth-Trunk10: LACP mode\\nMax active links: 2\\nActive: 10GE1/0/2, 10GE1/0/3\\nStandby: 10GE1/0/1 (higher LACP priority; recently recovered)\\nLACP preemption: disabled",
+      options: ["MSTP keeps recovered LACP members permanently blocked", "LACP actor keys must be unique per physical member", "The Eth-Trunk requires BGP multipath before a member can preempt", "Without LACP preemption, a recovered preferred member need not replace an existing active member"],
+      answer: [3],
+      explanation: "Huawei documents LACP preemption as the mechanism that lets a recovered, more-preferred member become active again. A delay can reduce flapping during recovery.",
+      distractors: "STP operates on the logical bundle, actor keys normally identify aggregation compatibility, and BGP is unrelated to physical LACP member selection.",
+      verify: "Check LACP selection and preemption on both ends; if the design requires restoration of preferred members, enable compatible preemption and delay settings on both devices.",
+      sourceTitle: "Huawei — Configuring LACP Preemption",
+      sourceUrl: "https://support.huawei.com/enterprise/en/doc/EDOC1100459497/8dafafb8/optional-configuring-lacp-preemption"
+    },
+    {
+      id: 8, domain: "Layer 2", vendor: "Nokia", difficulty: "Architect", type: "single",
+      prompt: "A four-member SR OS LAG loses two links. A dynamic degradation threshold is configured to raise the IGP cost, but the OSPF cost does not change. Why?",
+      exhibit: "LAG 20: 4 x 100G, 2 operational\\nDegradation action: dynamic-cost 400\\nOSPF interface lag-20: explicit cost 50\\nObserved OSPF metric: 50",
+      options: ["OSPF cannot run over a LAG", "Dynamic LAG cost applies only when all members fail", "An explicitly configured IGP cost has higher selection priority than a dynamic threshold cost", "LAG thresholds affect IS-IS but never OSPF"],
+      answer: [2],
+      explanation: "SR OS cost-selection priority places an explicit IGP cost above a dynamic LAG degradation cost. A static threshold action can take higher priority, or the explicit cost can be redesigned.",
+      distractors: "Both OSPF and IS-IS can use LAGs. Thresholds can react before total failure. The feature is not IS-IS-only.",
+      verify: "Inspect the effective protocol metric and LAG threshold action, then validate the intended metric change with one member removed at a time.",
+      sourceTitle: "Nokia SR OS — LAG thresholds and IGP cost",
+      sourceUrl: "https://documentation.nokia.com/sr/26-7/7750-sr/books/interface-configuration/lag.html"
+    },
+    {
+      id: 9, domain: "Layer 2", vendor: "TP-Link", difficulty: "Advanced", type: "multiple",
+      prompt: "Two TP-Link switches must belong to the same MST region. Which three attributes must match?",
+      exhibit: "Select three.",
+      options: ["Region name", "Revision level", "VLAN-to-instance mapping", "Per-port path cost"],
+      answer: [0,1,2],
+      explanation: "MST region identity is determined by the region name, revision, and VLAN-to-instance mapping. Port cost influences path selection inside an instance but is not part of region identity.",
+      distractors: "Per-port path cost may legitimately differ and does not create a different region.",
+      verify: "Compare all three region attributes on adjacent switches and confirm the ports are internal rather than boundary ports.",
+      sourceTitle: "TP-Link — Configuring Spanning Tree / MSTP Concepts",
+      sourceUrl: "https://www.tp-link.com/us/configuration-guides/configuring_spanning_tree/"
+    },
+    {
+      id: 10, domain: "Layer 2", vendor: "Extreme", difficulty: "Advanced", type: "single",
+      prompt: "Several Extreme switches were enabled for MSTP with defaults, but every inter-switch port appears to connect separate regions. What is the best explanation?",
+      exhibit: "Switch A MST region identifier: 00:04:96:AA:00:01\\nSwitch B MST region identifier: 00:04:96:AA:00:02\\nNo explicit region identifiers were configured.",
+      options: ["MSTP supports only one switch per region", "The default region identity is derived from each switch MAC, so explicit matching identifiers are required", "Every trunk is always an MST boundary", "The CIST must be disabled before regions can merge"],
+      answer: [1],
+      explanation: "Extreme documentation notes that default region identity uses the switch MAC, which is unique. Multiple switches require explicitly matching MST region identifiers.",
+      distractors: "MST regions are specifically designed to contain multiple switches. Trunks can be internal. The CIST is fundamental to MSTP and is not disabled to form a region.",
+      verify: "Configure matching region parameters, then inspect the digest/boundary status and root roles.",
+      sourceTitle: "Extreme Networks — MSTP Regions",
+      sourceUrl: "https://documentation.extremenetworks.com/exos_21.1/GUID-31F381B7-4C0D-4AB2-9821-67530CEF90F1.shtml"
+    },
+    {
+      id: 11, domain: "Layer 2", vendor: "HPE", difficulty: "Expert", type: "single",
+      prompt: "An HPE Comware IRF fabric splits after both IRF links fail. Both halves keep identical gateway IP and routing configuration active, causing duplicate forwarding. Which missing control is most directly responsible?",
+      exhibit: "<IRF-A> display mad verbose\\nMAD status: Disabled\\n\\nFailure: IRF-port 1/1 down, IRF-port 2/2 down\\nResult: two active masters with the same bridge MAC and SVIs",
+      options: ["OSPF graceful restart", "MSTP root guard", "LACP fast timers", "A Multi-Active Detection mechanism such as BFD MAD or LACP MAD"],
+      answer: [3],
+      explanation: "IRF presents multiple chassis as one node. When the fabric splits, MAD detects the duplicate active fabrics and places one side into recovery to avoid address and forwarding collisions.",
+      distractors: "OSPF GR, STP Root Guard, and faster LACP timers do not arbitrate duplicated IRF control planes.",
+      verify: "Configure a supported MAD method on an independent failure path, inspect display mad verbose, and test IRF-link loss without carrying production traffic.",
+      sourceTitle: "HPE — Configure BFD MAD for Comware IRF",
+      sourceUrl: "https://support.hpe.com/hpesc/public/docDisplay?docId=sf000097018en_us"
+    },
+    {
+      id: 12, domain: "Layer 2", vendor: "Cisco", difficulty: "Expert", type: "single",
+      prompt: "A server is single-attached to the secondary Nexus vPC peer on an orphan port. During a peer-link failure, the secondary suspends its vPC member ports but the orphan server keeps sending into an unsafe topology. Which control aligns the orphan with the vPC failure action?",
+      exhibit: "N9K-B# show vpc orphan-ports\\nVlan  Orphan Ports\\n210   Eth1/19\\n\\nvPC peer-link: down\\nPeer-keepalive: up\\nN9K-B role: secondary",
+      options: ["Configure vPC orphan-port suspend on the physical orphan interface", "Convert the server port to a routed OSPF interface", "Disable peer keepalive", "Enable PortFast network on the peer-link"],
+      answer: [0],
+      explanation: "Orphan-port suspend can shut the declared physical orphan interface on the secondary when vPC ports are suspended, avoiding unintended forwarding during relevant vPC failures.",
+      distractors: "Disabling keepalive worsens dual-active detection. PortFast is inappropriate on a peer-link. Converting the server attachment changes the design rather than applying the vPC safeguard.",
+      verify: "Declare the physical orphan, verify show vpc orphan-ports, and validate the peer-link failure behavior in a maintenance window.",
+      sourceTitle: "Cisco Nexus 9000 — Configuring vPC Orphan Ports",
+      sourceUrl: "https://www.cisco.com/c/en/us/td/docs/dcn/nx-os/nexus9000/105x/configuration/interfaces/cisco-nexus-9000-series-nx-os-interfaces-configuration-guide-release-105x/m_configuring_vpcs_9x.html"
+    },
+    {
+      id: 13, domain: "Layer 2", vendor: "Vendor-neutral", difficulty: "Advanced", type: "single",
+      prompt: "A four-link LACP bundle carries 30,000 small flows evenly, but one 40-Gbps backup flow never exceeds one 10-Gbps member. All members are up. What should the engineer conclude first?",
+      exhibit: "Po20 members: 4 x 10G, all collecting/distributing\\nAggregate utilization: 12.2 Gbps\\nMember utilization: 9.9, 0.8, 0.7, 0.8 Gbps\\nSingle backup session: TCP 10.1.1.10:443 -> 10.2.2.20:55000",
+      options: ["LACP must be in passive/passive state", "A per-flow hash preserves ordering, so one flow normally remains on one member", "STP is blocking three physical members", "The bundle requires four different system IDs"],
+      answer: [1],
+      explanation: "LAG hashing normally keeps a flow on one member to preserve packet order. Aggregate capacity benefits many flows; it does not make one flow equal the sum of all links.",
+      distractors: "Passive/passive would prevent bundle formation. STP sees the logical aggregate. Members of one actor use a common system identity.",
+      verify: "Inspect the platform hash inputs, test multiple independent flows, and use application parallelism if a single transfer must exceed one member's capacity.",
+      sourceTitle: "Nokia SR OS — LAG load balancing and packet sequencing",
+      sourceUrl: "https://documentation.nokia.com/sr/24-7/7750-sr/books/interface-configuration/lag.html"
+    },
+    {
+      id: 14, domain: "OSPF", vendor: "Cisco", difficulty: "Advanced", type: "single",
+      prompt: "A Cisco and a third-party router repeatedly reach EXSTART and reset. Hellos are bidirectional and authentication matches. What should be corrected first?",
+      exhibit: "R1# show ip ospf neighbor\\nNeighbor ID     State        Dead Time Address       Interface\\n10.0.0.2        EXSTART/DR   00:00:34  192.0.2.2     Gi0/0\\n\\nR1 Gi0/0 MTU 1500\\nR2 uplink MTU 9000\\nDebug: DBD received with interface MTU 9000; local receive MTU 1500",
+      options: ["Force both routers to priority 0", "Change the area to NSSA", "Match the actual interface MTU end to end before considering mtu-ignore", "Increase the OSPF reference bandwidth"],
+      answer: [2],
+      explanation: "An MTU mismatch can prevent successful Database Description exchange and leave neighbors in EXSTART/EXCHANGE. Matching the real forwarding MTU is safer than hiding the mismatch.",
+      distractors: "DR priority, area type, and reference bandwidth do not repair DBD MTU incompatibility.",
+      verify: "Validate large unfragmented pings and interface MTU, align the values, then confirm the adjacency progresses to FULL.",
+      sourceTitle: "Cisco — Troubleshoot OSPF Neighbors Stuck in Exstart/Exchange",
+      sourceUrl: "https://www.cisco.com/c/en/us/support/docs/ip/open-shortest-path-first-ospf/13684-12.html"
+    },
+    {
+      id: 15, domain: "OSPF", vendor: "Standards", difficulty: "Advanced", type: "single",
+      prompt: "On a broadcast LAN, two routers remain 2-WAY with each other, while both are FULL with the DR and BDR. There is no packet loss. What is the correct interpretation?",
+      exhibit: "R3 neighbors: R1 FULL/DR, R2 FULL/BDR, R4 2WAY/DROTHER\\nR4 neighbors: R1 FULL/DR, R2 FULL/BDR, R3 2WAY/DROTHER",
+      options: ["This is normal: DROTHER routers do not form full adjacency with each other on a broadcast segment", "Authentication is mismatched only between R3 and R4", "The LSDB must be manually synchronized between the DROTHERs", "The network type is point-to-multipoint"],
+      answer: [0],
+      explanation: "On a broadcast network, DROTHERs normally remain 2-WAY with one another and become fully adjacent to the DR and BDR. This reduces adjacency scale.",
+      distractors: "The observed DR/BDR roles contradict point-to-multipoint. Authentication failure would prevent normal neighbor progression. LSDB synchronization occurs through the DR/BDR topology.",
+      verify: "Confirm interface network type and DR/BDR election; compare LSDB checksums rather than trying to force every neighbor to FULL.",
+      sourceTitle: "IETF RFC 2328 — OSPF Version 2",
+      sourceUrl: "https://datatracker.ietf.org/doc/html/rfc2328"
+    },
+    {
+      id: 16, domain: "OSPF", vendor: "Vendor-neutral", difficulty: "Advanced", type: "multiple",
+      prompt: "Two routers exchange OSPF Hellos but never become neighbors. Which three fields must be checked for compatibility on the link?",
+      exhibit: "Capture: both directions contain OSPF Hello packets\\nR1: area 0.0.0.0, hello/dead 10/40, authentication key-id 5\\nR2 configuration not yet collected\\nSelect three.",
+      options: ["Area ID", "Hello/dead intervals", "Authentication parameters", "BGP local preference"],
+      answer: [0,1,2],
+      explanation: "Area, timer, and authentication compatibility are core adjacency checks. BGP local preference is unrelated to OSPF neighbor formation.",
+      distractors: "BGP attributes cannot prevent an OSPF Hello from being accepted.",
+      verify: "Decode both Hellos, compare the relevant fields and interface configuration, and use protocol-specific neighbor/debug counters.",
+      sourceTitle: "IETF RFC 2328 — OSPF neighbor formation",
+      sourceUrl: "https://datatracker.ietf.org/doc/html/rfc2328"
+    },
+    {
+      id: 17, domain: "OSPF", vendor: "Cisco", difficulty: "Expert", type: "single",
+      prompt: "Routers in two areas intermittently flush and re-originate Type-5 LSAs. Logs report a duplicate advertising router. What is the durable fix?",
+      exhibit: "%OSPF-4-DUP_RTRID2: Detected router with duplicate router ID 10.255.0.9\\n%OSPF-4-FLOOD_WAR: flushes LSA ID 203.0.113.0 type-5 adv-rtr 10.255.0.9",
+      options: ["Increase the external route metric", "Disable Type-4 LSAs", "Configure unique stable router IDs, restart the affected OSPF process under change control, and verify the LSDB", "Enable mtu-ignore on all area-border links"],
+      answer: [2],
+      explanation: "Router IDs must be unique throughout the relevant OSPF domain. Duplicate ASBR identities can cause external-LSA ownership conflicts and flood wars.",
+      distractors: "Metric changes do not change LSA identity. Type-4 reachability information is not the root cause. MTU ignore is unrelated.",
+      verify: "Trace the duplicated router ID from Router/ASBR summary LSAs, assign unique loopback-based IDs, restart carefully, and confirm stable sequence numbers.",
+      sourceTitle: "Cisco — Troubleshooting Duplicate Router IDs with OSPF",
+      sourceUrl: "https://www.cisco.com/c/en/us/support/docs/ip/open-shortest-path-first-ospf/23862-duplicate-router-id-ospf.html"
+    },
+    {
+      id: 18, domain: "OSPF", vendor: "Standards", difficulty: "Expert", type: "single",
+      prompt: "Two ASBRs advertise the same external prefix as E2 with equal external metric 20. One ASBR is 5 internal cost away and the other is 50. Which behavior is expected?",
+      exhibit: "Prefix: 198.51.100.0/24\\nASBR-A: E2 metric 20, internal cost 5\\nASBR-B: E2 metric 20, internal cost 50",
+      options: ["ASBR-B always wins because E2 adds internal cost to 20", "The external metric is compared first; internal cost is used as a tie-break toward the advertising ASBR/forwarding address", "Both paths are rejected because equal E2 metrics create a loop", "The route changes automatically to E1"],
+      answer: [1],
+      explanation: "For E2 routes, the external metric dominates. When equal, internal cost to the forwarding destination breaks the tie, so the path toward ASBR-A is preferred here.",
+      distractors: "E1 explicitly adds internal cost into the total. Equal candidates are not inherently loops. Route type does not automatically change.",
+      verify: "Inspect the external LSA metric/type and forwarding address, then compare the internal SPF cost to the effective destination.",
+      sourceTitle: "IETF RFC 2328 — AS external routes",
+      sourceUrl: "https://datatracker.ietf.org/doc/html/rfc2328"
+    },
+    {
+      id: 19, domain: "OSPF", vendor: "Vendor-neutral", difficulty: "Expert", type: "single",
+      prompt: "An NSSA ASBR originates a Type-7 LSA, but routers outside the NSSA never learn the external prefix. The P-bit requests translation. Which device should be examined first?",
+      exhibit: "NSSA LSDB: Type-7 172.20.40.0/24, P-bit set, adv-router 10.0.7.7\\nArea 0 LSDB: no matching Type-5\\nNSSA has two ABRs; translator election recently changed.",
+      options: ["The elected NSSA translator ABR and its Type-7-to-Type-5 translation state", "Every DROTHER inside the NSSA", "The Layer 2 STP root", "The iBGP route reflector"],
+      answer: [0],
+      explanation: "An NSSA ABR translates eligible Type-7 LSAs into Type-5 LSAs for the rest of the OSPF domain. With the P-bit set and no Type-5 present, translator election/state is the direct checkpoint.",
+      distractors: "DROTHER roles do not perform NSSA translation. STP and BGP route reflection are outside the mechanism.",
+      verify: "Identify the elected translator, inspect Type-7 and Type-5 LSAs on the ABR, and check area policy/ranges that may suppress translation.",
+      sourceTitle: "IETF RFC 3101 — The OSPF Not-So-Stubby Area Option",
+      sourceUrl: "https://datatracker.ietf.org/doc/html/rfc3101"
+    },
+    {
+      id: 20, domain: "OSPF", vendor: "Vendor-neutral", difficulty: "Expert", type: "single",
+      prompt: "A Type-5 LSA contains a nonzero forwarding address. The receiving router has reachability to the ASBR but not to that forwarding address. Why is the external route absent?",
+      exhibit: "Type-5 LSA\\nLink State ID: 203.0.113.0\\nAdvertising Router: 10.0.0.7\\nForward Address: 192.0.2.9\\nMetric Type: 2\\n\\nRIB: route to 10.0.0.7 exists; no route to 192.0.2.9",
+      options: ["Type-5 LSAs are ignored whenever the forwarding address is nonzero", "The route must be redistributed as E1", "The forwarding address must resolve through the OSPF routing domain for the external path to be usable", "The ASBR requires an iBGP session with every router"],
+      answer: [2],
+      explanation: "A nonzero forwarding address tells routers to forward toward that address rather than the ASBR. If it cannot be resolved appropriately, the external route cannot be installed.",
+      distractors: "Nonzero forwarding addresses are valid. E1 versus E2 does not repair resolution. iBGP is not an OSPF dependency.",
+      verify: "Check the LSA, route to the forwarding address, and the ASBR's conditions for setting it; correct internal advertisement or redistribution design.",
+      sourceTitle: "IETF RFC 2328 — Forwarding address processing",
+      sourceUrl: "https://datatracker.ietf.org/doc/html/rfc2328"
+    },
+    {
+      id: 21, domain: "OSPFv3", vendor: "Arista", difficulty: "Advanced", type: "single",
+      prompt: "Two EOS switches have different global IPv6 prefixes on a shared Ethernet segment, yet OSPFv3 reaches FULL. Is this necessarily an error?",
+      exhibit: "Leaf1 Ethernet3: fe80::1/64, 2001:db8:10::1/64\\nLeaf2 Ethernet3: fe80::2/64, 2001:db8:20::2/64\\nOSPFv3 neighbor: FULL/DR via fe80::2",
+      options: ["Yes; global IPv6 prefixes must match before Hellos are accepted", "No; OSPFv3 forms adjacency per link and commonly uses link-local addresses as next hops", "Yes; OSPFv3 requires IPv4-compatible addresses", "No; because OSPFv3 is transported over TCP"],
+      answer: [1],
+      explanation: "OSPFv3 operates on links and uses IPv6 link-local communication for neighbor relationships. Different global prefixes may signal a separate addressing issue but do not alone invalidate the adjacency.",
+      distractors: "OSPFv3 does not require IPv4-compatible addressing and uses IP protocol 89, not TCP.",
+      verify: "Inspect link-local neighbor/next-hop information, interface instance/area settings, and separately validate whether the global-prefix design is intentional.",
+      sourceTitle: "Arista EOS — Open Shortest Path First Version 3",
+      sourceUrl: "https://www.arista.com/en/um-eos/eos-open-shortest-path-first-version-3"
+    },
+    {
+      id: 22, domain: "OSPFv3", vendor: "Arista", difficulty: "Expert", type: "single",
+      prompt: "An OSPFv3 adjacency uses BFD. At T0 the data link silently stops forwarding; BFD declares Down at T+0.9s, OSPF removes the neighbor at T+1.0s, the FIB changes at T+1.2s, and the application recovers at T+5.5s. What does the evidence prove?",
+      exhibit: "T+0.0  data-plane fault begins\\nT+0.9  BFD Down\\nT+1.0  OSPF neighbor Down\\nT+1.2  alternate next hop programmed\\nT+5.5  application reconnect succeeds",
+      options: ["BFD reduced failure detection, but routing, FIB programming, and application recovery remained separate phases", "BFD itself repaired the application session at T+0.9s", "OSPF Hello timers detected the failure before BFD", "The FIB changed before the control plane knew about the failure"],
+      answer: [0],
+      explanation: "The timestamps separate detection, protocol reaction, forwarding convergence, and application recovery. BFD accelerated the first phase; it did not guarantee session preservation.",
+      distractors: "The application recovered much later. OSPF followed BFD. FIB programming followed the neighbor event.",
+      verify: "Correlate BFD, adjacency, RIB/FIB, packet capture, and application logs rather than reporting only the first down event.",
+      sourceTitle: "Arista EOS — OSPFv3 and BFD",
+      sourceUrl: "https://www.arista.com/en/um-eos/eos-open-shortest-path-first-version-3"
+    },
+    {
+      id: 23, domain: "OSPF", vendor: "Check Point", difficulty: "Expert", type: "single",
+      prompt: "A Check Point Gaia gateway runs OSPF over a route-based VPN VTI. An engineer adds a Portal redistribution rule, but no routes are exported because an older CLI route map remains assigned. What should be corrected?",
+      exhibit: "VTI adjacency: FULL\\nGaia Portal redistribution: static -> OSPF allow\\nGaia Clish: route map EXPORT-OLD assigned to OSPF export; no matching permit\\nObserved: static prefix absent from LSDB",
+      options: ["Change the VTI to a policy-based VPN", "Remove or update the assigned route map because the route-map policy takes precedence over the corresponding Portal configuration", "Disable OSPF authentication", "Convert the static route to RIP"],
+      answer: [1],
+      explanation: "Gaia route maps assigned to a protocol override the corresponding Portal filtering/redistribution behavior. The stale route map, not the healthy VTI adjacency, is blocking export.",
+      distractors: "OSPF can run over a VTI. Authentication is already working. Changing protocols avoids rather than fixes policy precedence.",
+      verify: "Inspect the active route map and protocol assignment, correct the permit logic, and verify the prefix in the OSPF database and downstream RIB.",
+      sourceTitle: "Check Point Gaia — Route Maps",
+      sourceUrl: "https://sc1.checkpoint.com/documents/SMB_R80.20.X/Dynamic_Routing/EN/Content/Topics/Route-Maps.htm"
+    },
+    {
+      id: 24, domain: "OSPF", vendor: "Vendor-neutral", difficulty: "Advanced", type: "single",
+      prompt: "A team configures an OSPF inter-area summary on the router redistributing external routes, but Type-3 LSAs remain unsummarized. The router has no interface in area 0. What is wrong?",
+      exhibit: "R7 roles: ASBR in area 20; not an ABR\\nConfigured intent: summarize 10.20.0.0/16 between area 20 and area 0\\nObserved in area 0: 10.20.1.0/24 ... 10.20.99.0/24",
+      options: ["Only the DR can originate Type-3 summaries", "Inter-area summarization must be configured on the ABR that connects the areas", "All prefixes must first be converted to Type-7", "OSPF never supports summarization"],
+      answer: [1],
+      explanation: "Type-3 inter-area summaries are originated by ABRs. An ASBR role alone does not give a router authority to summarize area prefixes into another area.",
+      distractors: "DR election is per multiaccess segment. Type-7 is an NSSA external mechanism. OSPF supports ABR and ASBR summarization in different contexts.",
+      verify: "Identify the ABR, inspect its area ranges and Type-3 LSAs, and ensure the component routes exist before activating the summary.",
+      sourceTitle: "IETF RFC 2328 — Area border router behavior",
+      sourceUrl: "https://datatracker.ietf.org/doc/html/rfc2328"
+    },
+    {
+      id: 25, domain: "OSPF", vendor: "Vendor-neutral", difficulty: "Advanced", type: "single",
+      prompt: "A branch is configured to originate a default into OSPF only when it has an installed Internet default. The ISP route disappears, and the OSPF default is withdrawn. Is this expected?",
+      exhibit: "Policy: default-information originate (conditional)\\nT0: 0.0.0.0/0 via ISP installed; Type-5 default present\\nT1: ISP next hop unresolved; local default removed; Type-5 default withdrawn",
+      options: ["No; default origination always ignores the local RIB", "Yes; conditional origination prevents advertising an unusable exit", "No; OSPF defaults can only be Type-3", "Yes; but only because the area is totally stubby"],
+      answer: [1],
+      explanation: "Conditional default origination is designed to track local eligibility, commonly the presence of a default route. Withdrawal helps avoid attracting traffic to a failed exit.",
+      distractors: "An ASBR may advertise an external default. The behavior is not limited to totally stubby areas, and unconditional variants explicitly differ.",
+      verify: "Check the originating policy/command, local default resolution, and corresponding default LSA before and after failure.",
+      sourceTitle: "IETF RFC 2328 — AS external default routing",
+      sourceUrl: "https://datatracker.ietf.org/doc/html/rfc2328"
+    },
+    {
+      id: 26, domain: "BGP", vendor: "Cisco", difficulty: "Advanced", type: "single",
+      prompt: "A router selects a path with AS_PATH length 4 over a path with AS_PATH length 2. The longer path has LOCAL_PREF 250 and the shorter has LOCAL_PREF 100. No Weight is set. Why?",
+      exhibit: "Path A: valid, localpref 250, AS_PATH 65100 65200 65300 65400\\nPath B: valid, localpref 100, AS_PATH 65500 65600\\nBest: Path A",
+      options: ["LOCAL_PREF is evaluated before AS_PATH length", "AS_PATH is ignored for eBGP routes", "The lower LOCAL_PREF is preferred", "MED is always evaluated before LOCAL_PREF"],
+      answer: [0],
+      explanation: "After Cisco-specific Weight, higher LOCAL_PREF is considered before AS_PATH length. The longer path can therefore win by policy.",
+      distractors: "AS_PATH remains relevant. Higher, not lower, LOCAL_PREF wins. MED is evaluated later.",
+      verify: "Inspect all candidate attributes and the platform's documented selection order; trace the inbound policy that set 250.",
+      sourceTitle: "Cisco — Select BGP Best-path Algorithm",
+      sourceUrl: "https://www.cisco.com/c/en/us/support/docs/ip/border-gateway-protocol-bgp/13753-25.html"
+    },
+    {
+      id: 27, domain: "BGP", vendor: "Standards", difficulty: "Expert", type: "single",
+      prompt: "Three otherwise equal routes arrive from AS 65010, AS 65020, and AS 65010. MEDs are 30, 5, and 20. With default MED comparison behavior, which comparison grouping matters?",
+      exhibit: "P1 from AS65010 MED30\\nP2 from AS65020 MED5\\nP3 from AS65010 MED20\\nNo always-compare-MED; earlier attributes equal",
+      options: ["All MEDs are compared globally", "MED is normally comparable among paths received from the same neighboring AS, so ordering and grouping can affect the result", "MED is never used for eBGP", "Only the highest MED is eligible"],
+      answer: [1],
+      explanation: "Default implementations commonly compare MED among paths from the same neighboring AS, not universally. This is why deterministic grouping and always-compare-MED are distinct controls.",
+      distractors: "MED is an eBGP policy attribute and lower is generally preferred. Global comparison requires explicit behavior.",
+      verify: "Check the platform defaults, candidate order, neighboring AS grouping, and best-path debug before changing MED knobs.",
+      sourceTitle: "Cisco — BGP Best Path and MED behavior",
+      sourceUrl: "https://www.cisco.com/c/en/us/support/docs/ip/border-gateway-protocol-bgp/13753-25.html"
+    },
+    {
+      id: 28, domain: "BGP", vendor: "Vendor-neutral", difficulty: "Architect", type: "single",
+      prompt: "Which change provides repeatable MED comparison within each neighboring AS without making MED comparable across different neighboring ASes?",
+      exhibit: "Requirement: remove arrival-order sensitivity among multiple paths from the same adjacent AS.\\nConstraint: do not compare ISP-A's MED directly with ISP-B's MED.",
+      options: ["Enable always-compare-MED", "Strip MED on all ingress sessions", "Enable deterministic MED", "Set local preference equal to MED"],
+      answer: [2],
+      explanation: "Deterministic MED groups paths by neighboring AS and performs consistent comparison within each group. Always-compare-MED deliberately extends comparison across different neighboring ASes.",
+      distractors: "Stripping MED discards the signal. Mapping MED directly to LOCAL_PREF changes scope and semantics. Always-compare-MED violates the stated constraint.",
+      verify: "Model current candidates, enable the feature in a lab or maintenance window, and compare best-path stability across session resets.",
+      sourceTitle: "Cisco — BGP Best Path Selection",
+      sourceUrl: "https://www.cisco.com/c/en/us/support/docs/ip/border-gateway-protocol-bgp/13753-25.html"
+    },
+    {
+      id: 29, domain: "BGP", vendor: "Juniper", difficulty: "Advanced", type: "single",
+      prompt: "An edge router advertises an eBGP-learned prefix to an iBGP peer. The iBGP peer receives the route but marks it unusable because the original external next hop is unreachable. What is the usual edge correction?",
+      exhibit: "Edge eBGP next hop: 192.0.2.1\\nCore iBGP route: 203.0.113.0/24 next-hop 192.0.2.1 hidden/unresolved\\nIGP carries edge loopbacks, not the ISP transit subnet",
+      options: ["Set next-hop self toward the iBGP peer, or intentionally carry the external next hop in the IGP", "Prepend the local AS twice", "Raise MED on the ISP route", "Convert iBGP to RIP"],
+      answer: [0],
+      explanation: "iBGP does not normally rewrite the BGP next hop learned through eBGP. The next hop must resolve, commonly by setting next-hop self at the edge.",
+      distractors: "AS prepending and MED affect preference, not next-hop reachability. Replacing iBGP with RIP is not a targeted correction.",
+      verify: "Inspect the protocol next hop, recursive resolution, RIB status, and forwarding next hop after the policy change.",
+      sourceTitle: "Juniper — BGP Overview and Route Resolution",
+      sourceUrl: "https://www.juniper.net/documentation/us/en/software/junos/bgp/topics/topic-map/bgp-overview.html"
+    },
+    {
+      id: 30, domain: "BGP", vendor: "Cisco", difficulty: "Architect", type: "single",
+      prompt: "A centralized route reflector chooses exit West because West is closest to the reflector. An East client would reach exit East at far lower IGP cost, but receives only the reflector's single best path. What design addresses the reflector-perspective problem?",
+      exhibit: "RR IGP cost: West 10, East 80\\nEast-client IGP cost: West 90, East 5\\nAll BGP attributes equal before IGP-next-hop cost\\nRR advertises only West to clients",
+      options: ["Increase the East client's OSPF dead timer", "Use optimal route reflection, add-path, or a reflector placement/design that exposes the appropriate alternatives", "Set both exits to the same router ID", "Disable recursive next-hop resolution"],
+      answer: [1],
+      explanation: "A traditional RR selects one best path from its own topology position. ORR, add-path, or topology-aware RR placement can prevent clients from being forced to use that perspective.",
+      distractors: "Timers do not expose the missing path. Duplicate router IDs are harmful. Disabling resolution makes routes unusable.",
+      verify: "Compare candidate paths at the RR and client, IGP cost from both positions, and the routes actually advertised to the client.",
+      sourceTitle: "Cisco — BGP Optimal Route Reflection",
+      sourceUrl: "https://www.cisco.com/c/en/us/support/docs/ip/border-gateway-protocol-bgp/212881-border-gateway-protocol-bgp-optimal-ro.html"
+    },
+    {
+      id: 31, domain: "BGP", vendor: "Vendor-neutral", difficulty: "Expert", type: "multiple",
+      prompt: "Which two route-reflector attributes primarily prevent reflected-route loops?",
+      exhibit: "Select two.",
+      options: ["ORIGINATOR_ID", "CLUSTER_LIST", "ATOMIC_AGGREGATE", "MULTI_EXIT_DISC"],
+      answer: [0,1],
+      explanation: "ORIGINATOR_ID identifies the originating iBGP speaker, and CLUSTER_LIST records reflection clusters. Reflectors use these attributes to reject reflected loops.",
+      distractors: "ATOMIC_AGGREGATE describes aggregation information. MED influences path preference and is not an RR loop-prevention record.",
+      verify: "Inspect reflected updates and confirm clients/reflectors reject their own originator or cluster identifiers.",
+      sourceTitle: "IETF RFC 4456 — BGP Route Reflection",
+      sourceUrl: "https://datatracker.ietf.org/doc/html/rfc4456"
+    },
+    {
+      id: 32, domain: "BGP", vendor: "Cisco", difficulty: "Expert", type: "single",
+      prompt: "A Cisco router shows two valid eBGP paths, but only one is installed in the RIB despite maximum-paths 2. Local preference and AS_PATH length match; MEDs are 0 and 20. What is the likely reason?",
+      exhibit: "maximum-paths 2\\nPath A: LP100, AS_PATH 65010, origin i, MED0, IGP metric 10\\nPath B: LP100, AS_PATH 65020, origin i, MED20, IGP metric 10",
+      options: ["BGP multipath installs every valid path regardless of attributes", "eBGP paths cannot be multipath", "The paths do not meet multipath equivalence because relevant best-path attributes such as MED differ", "maximum-paths applies only to OSPF"],
+      answer: [2],
+      explanation: "Maximum-paths sets an upper bound; candidates must still satisfy platform multipath equivalence. Differing MED prevents these paths from qualifying under the documented criteria.",
+      distractors: "eBGP multipath is supported. Valid does not mean equal. The command is a BGP feature.",
+      verify: "Compare every multipath-required attribute and the IGP cost to each next hop, then inspect the BGP and RIB multipath flags.",
+      sourceTitle: "Cisco — BGP Multipath Requirements",
+      sourceUrl: "https://www.cisco.com/c/en/us/support/docs/ip/border-gateway-protocol-bgp/13753-25.html"
+    },
+    {
+      id: 33, domain: "Convergence", vendor: "Standards", difficulty: "Architect", type: "single",
+      prompt: "A BFD session detects failure in 300 ms, but a remote site continues using the failed path for 18 seconds. Local FIB convergence completed in 800 ms. What measurement should be investigated next?",
+      exhibit: "T+0.3 local BFD Down\\nT+0.5 local BGP route withdrawn\\nT+0.8 local FIB alternate installed\\nT+18.0 remote router withdraw received / best path changed",
+      options: ["Propagation and remote decision/FIB timing along the BGP path", "Ethernet duplex on the local loopback", "The local BFD discriminator only", "Application DNS TTL only"],
+      answer: [0],
+      explanation: "Fast local detection does not guarantee fast network-wide propagation. The gap is after the local withdrawal and before remote convergence, so update propagation, policy, MRAI/processing, and remote programming are the next checkpoints.",
+      distractors: "Local BFD already detected the fault. Loopback duplex is nonsensical. DNS could affect application behavior but not the observed remote BGP timestamp.",
+      verify: "Correlate update transmit/receive timestamps hop by hop, remote best-path selection, RIB-to-FIB programming, and traffic recovery.",
+      sourceTitle: "IETF RFC 5880 — Bidirectional Forwarding Detection",
+      sourceUrl: "https://datatracker.ietf.org/doc/html/rfc5880"
+    },
+    {
+      id: 34, domain: "BGP", vendor: "Vendor-neutral", difficulty: "Expert", type: "single",
+      prompt: "An aggregate 10.0.0.0/8 should be advertised only while at least one component route exists, and specifics should be suppressed externally. Which design is safest?",
+      exhibit: "Internal RIB currently contains 10.20.0.0/16 and 10.30.0.0/16\\nExternal requirement: advertise 10.0.0.0/8 only; withdraw it when no component remains",
+      options: ["Create an unconditional static discard /8 and advertise it forever", "Use BGP aggregation with suppression/summary-only semantics and verify component-route dependency", "Redistribute every connected route without filtering", "Advertise a default route instead"],
+      answer: [1],
+      explanation: "Protocol-aware aggregation can condition the aggregate on contributing routes and suppress specifics. A discard route may be installed to prevent loops, but making the advertisement unconditional can blackhole traffic after components disappear.",
+      distractors: "Unfiltered redistribution leaks routes. A default changes reachability scope. An unconditional aggregate violates the withdrawal requirement.",
+      verify: "Remove component routes in a lab, confirm the aggregate and discard behavior, and inspect advertised routes to each neighbor.",
+      sourceTitle: "IETF RFC 4271 — BGP-4 Route Aggregation",
+      sourceUrl: "https://datatracker.ietf.org/doc/html/rfc4271"
+    },
+    {
+      id: 35, domain: "BGP", vendor: "Vendor-neutral", difficulty: "Advanced", type: "single",
+      prompt: "A dual-homed enterprise wants ISP-B to be less attractive for inbound traffic while leaving ISP-A unchanged. Where should AS-path prepending be applied?",
+      exhibit: "Enterprise AS 64520\\nISP-A eBGP: primary inbound\\nISP-B eBGP: backup inbound\\nGoal: influence remote ASes without changing local outbound selection",
+      options: ["Inbound on routes received from ISP-B", "Outbound on enterprise prefixes advertised to ISP-B", "Inbound on OSPF routes", "Outbound toward ISP-A only"],
+      answer: [1],
+      explanation: "Prepending the enterprise AS on advertisements sent to ISP-B makes that external path appear longer to remote networks. It does not directly control the enterprise's own outbound best path.",
+      distractors: "Inbound prepending modifies received routes and affects outbound selection. OSPF does not carry AS_PATH. Prepending toward the preferred ISP reverses the intent.",
+      verify: "Check routes advertised to both ISPs, use external route visibility, and remember that remote policy can override AS_PATH length.",
+      sourceTitle: "Juniper — Basic BGP Routing Policies",
+      sourceUrl: "https://www.juniper.net/documentation/us/en/software/junos/bgp/topics/topic-map/basic-routing-policies.html"
+    },
+    {
+      id: 36, domain: "BGP", vendor: "Standards", difficulty: "Advanced", type: "single",
+      prompt: "A route tagged NO_EXPORT is learned by an ISP edge. Which behavior is expected?",
+      exhibit: "Received update: 192.0.2.0/24 community NO_EXPORT\\nISP edge has iBGP peers and external eBGP transit peers",
+      options: ["It may be propagated inside the local AS/confederation as allowed, but not advertised outside the confederation boundary", "It must be removed from the local RIB", "It is advertised only to eBGP peers", "It changes LOCAL_PREF to zero"],
+      answer: [0],
+      explanation: "NO_EXPORT constrains external advertisement beyond the AS/confederation boundary; it does not inherently invalidate the route or set LOCAL_PREF.",
+      distractors: "The community is an export scope signal, not a mandatory RIB rejection or local-preference value.",
+      verify: "Inspect community preservation and advertised-route output on internal versus external peers.",
+      sourceTitle: "IETF RFC 1997 — BGP Communities Attribute",
+      sourceUrl: "https://datatracker.ietf.org/doc/html/rfc1997"
+    },
+    {
+      id: 37, domain: "BGP", vendor: "Check Point", difficulty: "Expert", type: "single",
+      prompt: "A new Gaia BGP session reaches Established and receives updates, but no prefixes enter the usable routing table. No inbound policy was explicitly configured. What platform behavior should be checked?",
+      exhibit: "show bgp peer: Established, 422 updates received\\nshow route: no BGP routes\\nInbound route-filter policy: default / no explicit accept entries",
+      options: ["Gaia automatically accepts all BGP routes, so only MTU can explain this", "Gaia's default BGP inbound policy can restrict all routes until explicit acceptance is configured", "BGP routes require OSPF Type-5 translation", "The peer must use the same AS number"],
+      answer: [1],
+      explanation: "Check Point documents a restrictive default for BGP inbound acceptance. An Established transport session does not prove policy acceptance or RIB installation.",
+      distractors: "Same-AS peering would normally be iBGP but is not required for BGP generally. OSPF translation is unrelated. Received updates can be rejected by policy.",
+      verify: "Inspect inbound filters/route maps, accepted-versus-received counters, and route-map precedence before adding a narrow explicit permit.",
+      sourceTitle: "Check Point Gaia — Routing Policy Configuration",
+      sourceUrl: "https://sc1.checkpoint.com/documents/R80.30/WebAdminGuides/EN/CP_R80.30_Gaia_Advanced_Routing_AdminGuide/162207.htm"
+    },
+    {
+      id: 38, domain: "BGP", vendor: "Cloudflare", difficulty: "Architect", type: "multiple",
+      prompt: "A Magic Transit deployment uses BGP over GRE tunnels. Which three statements align with the documented behavior?",
+      exhibit: "Select three.\\nDesign: two GRE tunnels, customer CPE AS 64540, Cloudflare-side AS 13335.",
+      options: ["The customer CPE must initiate the BGP session", "A nonzero hold time with keepalives is required", "BFD is currently unsupported for this BGP service, so tunnel health checks remain important", "Cloudflare must initiate every BGP TCP session"],
+      answer: [0,1,2],
+      explanation: "For BGP over GRE/IPsec in this service, the CPE initiates; hold time must be greater than zero; and BFD is not supported. Tunnel health checks provide a separate reachability signal used by traffic steering.",
+      distractors: "The claim that Cloudflare must initiate contradicts the documented session behavior.",
+      verify: "Validate tunnel interface addressing, TCP/179 initiation from the CPE, negotiated timers, learned routes, and health-check state independently.",
+      sourceTitle: "Cloudflare Magic Transit — Configure Routes and BGP",
+      sourceUrl: "https://developers.cloudflare.com/magic-transit/how-to/configure-routes/"
+    },
+    {
+      id: 39, domain: "BGP", vendor: "F5", difficulty: "Expert", type: "multiple",
+      prompt: "A BIG-IP route domain has BGP enabled, but the neighbor cannot open TCP/179 to the system. Which two checks are most relevant?",
+      exhibit: "Select two.\\nRoute domain 12: BGP enabled\\nPeer SYN reaches VLAN\\nNo SYN-ACK from BIG-IP self IP\\nHA pair recently received a configuration sync",
+      options: ["Self IP port lockdown/allocation permits the relevant TCP/179 connection", "The routing protocol is enabled on the intended route domain and was enabled/synchronized using the supported HA procedure", "HTTP virtual-server persistence is set to source address", "The pool member health monitor uses ICMP"],
+      answer: [0,1],
+      explanation: "BIG-IP dynamic routing depends on enabling the protocol per route domain and allowing the protocol connection to the appropriate self IP. The documentation also warns about runtime protocol-enable synchronization behavior in redundant systems.",
+      distractors: "Virtual-server persistence and application pool monitors do not control the BGP daemon's TCP session.",
+      verify: "Confirm the route domain, self-IP service allowance, listener/socket, packet capture, and active/standby protocol state.",
+      sourceTitle: "F5 BIG-IP — Dynamic Routing",
+      sourceUrl: "https://techdocs.f5.com/kb/en-us/products/big-ip_ltm/manuals/product/tmos-routing-administration-13-0-0/10.html"
+    },
+    {
+      id: 40, domain: "BGP", vendor: "Fortinet", difficulty: "Expert", type: "single",
+      prompt: "A FortiGate learns an iBGP route, but it does not enter the routing table. The BGP path is valid except that its next hop is a loopback not present in the RIB. What is the first corrective direction?",
+      exhibit: "get router info bgp network 10.44.0.0/16\\nPaths: (1 available, no best path)\\n  65030, internal\\n  Next hop 10.255.30.1 inaccessible\\n\\nget router info routing-table details 10.255.30.1\\nRouting table entry not found",
+      options: ["Create or restore intentional recursive reachability to the BGP next hop, or apply next-hop-self at the correct boundary", "Lower the firewall policy ID", "Enable central NAT", "Change the route origin from IGP to incomplete"],
+      answer: [0],
+      explanation: "BGP next-hop resolution is a prerequisite for installing and forwarding the route. Policy/NAT processing occurs after routing eligibility and does not make an unresolved BGP path usable.",
+      distractors: "ORIGIN is a preference attribute, not next-hop reachability. Firewall-policy order and NAT are not control-plane resolution fixes.",
+      verify: "Use BGP path output and get router info routing-table details for the next hop; then confirm both RIB installation and FIB/session behavior.",
+      sourceTitle: "Fortinet — FortiGate BGP administration",
+      sourceUrl: "https://docs.fortinet.com/document/fortigate/latest/administration-guide/763058/bgp"
+    },
+    {
+      id: 41, domain: "BGP", vendor: "Arista", difficulty: "Architect", type: "single",
+      prompt: "During a maintenance event, BGP Graceful Restart keeps stale routes on a helper, but the restarting router loses its forwarding state. Traffic is blackholed until the session returns. What design lesson follows?",
+      exhibit: "T0 BGP restart signaled GR capability\\nT+1 helper retains stale routes\\nT+2 restarting peer has no preserved FIB and drops transit traffic\\nT+38 BGP recovers; traffic resumes",
+      options: ["Graceful Restart is equivalent to nonstop forwarding on every platform", "Retaining stale control-plane routes is safe only when the restarting node can continue forwarding or the topology has another valid safeguard", "BFD must always be disabled with GR", "Stale routes are refreshed by STP"],
+      answer: [1],
+      explanation: "GR helper behavior deliberately retains stale routes. If the restarting peer cannot forward, those routes can blackhole traffic. The design must validate forwarding preservation, failure scope, and timer tradeoffs.",
+      distractors: "GR is not universal NSF. STP does not refresh BGP routes. BFD/GR interaction is a design choice rather than an absolute ban.",
+      verify: "Test restart behavior with traffic, inspect stale-route flags and the peer FIB, and compare fail-open retention against fast withdrawal.",
+      sourceTitle: "Arista EOS — Smart System Upgrade and BGP Graceful Restart",
+      sourceUrl: "https://www.arista.com/en/um-eos/eos-smart-system-upgrade"
+    },
+    {
+      id: 42, domain: "Routing Policy", vendor: "Juniper", difficulty: "Expert", type: "single",
+      prompt: "A Junos export policy term accepts 10.0.0.0/8 through an exact match, but the intended /16 component routes are not advertised. What should change?",
+      exhibit: "policy-options {\\n  prefix-list CORP { 10.0.0.0/8; }\\n  policy-statement EXPORT {\\n    term corp { from { prefix-list CORP; } then accept; }\\n  }\\n}\\nRequirement: advertise routes more specific than /8 through /24.",
+      options: ["Change the route preference to 255", "Use an appropriate route-filter/prefix-list match that explicitly permits the desired more-specific range", "Enable OSPF on the eBGP interface", "Set next-hop discard on every /16"],
+      answer: [1],
+      explanation: "An exact prefix match does not automatically include more-specific routes. The policy must express the intended prefix-length range.",
+      distractors: "Route preference and OSPF do not alter policy match semantics. Discard next hops would change forwarding and remain unnecessary.",
+      verify: "Test the policy against representative /8, /16, /24, and /25 routes, then inspect advertised routes before commit.",
+      sourceTitle: "Juniper — Routing Policy Overview",
+      sourceUrl: "https://www.juniper.net/documentation/us/en/software/junos/junos-overview/topics/concept/routing-policy-overview.html"
+    },
+    {
+      id: 43, domain: "IS-IS", vendor: "Nokia", difficulty: "Expert", type: "single",
+      prompt: "A Nokia SR OS core needs partial LAG degradation to influence IS-IS before the LAG goes fully down. Which design matches that goal?",
+      exhibit: "LAG core-1: 8 x 100G\\nRequirement: at 4 or fewer active members, make the path less preferred; at 2 or fewer, declare the LAG down.",
+      options: ["Use only the physical-port description strings", "Use LAG degradation thresholds/actions integrated with IS-IS cost, plus a separate operational-down threshold", "Rely on BGP MED for the local IS-IS link", "Disable LACP so every member has an independent IS-IS adjacency"],
+      answer: [1],
+      explanation: "SR OS LAG thresholds can change the effective IGP cost or operational state according to remaining ports, weight, or bandwidth. Staged thresholds let the network deprefer before declaring failure.",
+      distractors: "Descriptions have no forwarding effect. BGP MED is not a local IS-IS metric. Independent adjacencies change the LAG design and can create per-link complexity.",
+      verify: "Fail members incrementally and record effective LAG state, IS-IS metric/LSP generation, SPF/FIB convergence, and traffic distribution.",
+      sourceTitle: "Nokia SR OS — LAG thresholds",
+      sourceUrl: "https://documentation.nokia.com/sr/26-7/7750-sr/books/interface-configuration/lag.html"
+    },
+    {
+      id: 44, domain: "IS-IS", vendor: "Standards", difficulty: "Expert", type: "single",
+      prompt: "An L1-only router can reach all prefixes in its area but cannot reach another area. It has an attached-bit default toward an L1/L2 router. The L1/L2 router has no L2 adjacency after a maintenance error. What is the actual failure?",
+      exhibit: "Access-R1: L1 adjacency to ABR-like R2; default installed via attached bit\\nR2: L1 database healthy; L2 adjacency count 0\\nRemote prefix: in another IS-IS area",
+      options: ["The L1 router must run eBGP", "The default is usable only if the L1/L2 router has working L2 connectivity to other areas; that upstream L2 path is broken", "The attached bit carries the entire remote LSDB", "IS-IS areas require an OSPF virtual link"],
+      answer: [1],
+      explanation: "L1 routers use an attached-bit-derived default toward L1/L2 routers for inter-area reachability. If the L1/L2 router loses its L2 path, the default can attract traffic to a dead end.",
+      distractors: "The attached bit does not import the full remote L2 LSDB. eBGP and OSPF virtual links are unrelated.",
+      verify: "Check L2 adjacencies and L2 LSDB on the L1/L2 router, then validate default withdrawal/overload policy for loss of backbone reachability.",
+      sourceTitle: "IETF RFC 1195 — Integrated IS-IS",
+      sourceUrl: "https://datatracker.ietf.org/doc/html/rfc1195"
+    },
+    {
+      id: 45, domain: "IS-IS", vendor: "Vendor-neutral", difficulty: "Advanced", type: "single",
+      prompt: "An IS-IS adjacency is Up, the remote prefix exists in the LSP database, but no IPv4 route is installed. The advertised next hop resolves only through a table excluded from the current routing instance. Which layer should be investigated?",
+      exhibit: "IS-IS adjacency: Up\\nIS-IS database: 10.90.0.0/16 metric 20 present\\nProtocol route: inactive, next-hop resolution failed in VRF BLUE\\nGlobal table has next hop; BLUE does not",
+      options: ["Only the Hello padding size", "Routing-instance/table context and recursive next-hop resolution", "The Ethernet source MAC aging timer", "BGP cluster-list length"],
+      answer: [1],
+      explanation: "Adjacency and LSDB presence prove control information arrived, not that the route can resolve in the correct table. VRF/routing-instance context can prevent installation.",
+      distractors: "Hello padding would affect adjacency formation. MAC aging and RR attributes do not explain the inactive IS-IS route.",
+      verify: "Inspect the protocol route's inactive reason, table-specific next-hop lookup, interface binding, and resulting FIB entry.",
+      sourceTitle: "Juniper — Routing Instances Overview",
+      sourceUrl: "https://www.juniper.net/documentation/us/en/software/junos/routing-overview/topics/concept/routing-instances-overview.html"
+    },
+    {
+      id: 46, domain: "RIP", vendor: "Standards", difficulty: "Advanced", type: "single",
+      prompt: "After a loop forms during a RIP failure, a route metric climbs 13, 14, 15, then 16 and becomes unreachable. Which property is being observed?",
+      exhibit: "T0 route metric 2\\nT+30 metric 13\\nT+60 metric 14\\nT+90 metric 15\\nT+120 metric 16 / unreachable",
+      options: ["OSPF maximum age", "BGP AS-path loop detection", "RIP count-to-infinity bounded by metric 16, which represents infinity", "IS-IS overload-bit behavior"],
+      answer: [2],
+      explanation: "RIP's distance-vector loop behavior can count upward; the protocol bounds infinity at 16 hops. Split horizon, poison reverse, and triggered updates reduce but do not turn RIP into a link-state protocol.",
+      distractors: "The metric sequence is specific to RIP hop-count behavior, not OSPF aging, BGP AS paths, or IS-IS overload.",
+      verify: "Capture route updates and inspect next-hop/metric progression; correct the loop and validate split-horizon/poisoning behavior.",
+      sourceTitle: "IETF RFC 2453 — RIP Version 2",
+      sourceUrl: "https://datatracker.ietf.org/doc/html/rfc2453"
+    },
+    {
+      id: 47, domain: "EIGRP", vendor: "Cisco", difficulty: "Expert", type: "single",
+      prompt: "An EIGRP route becomes Active and remains stuck because queries propagate through hundreds of spokes, including devices that have no alternate knowledge. What is the best scaling correction?",
+      exhibit: "DUAL-3-SIA: Route 10.80.0.0/16 stuck-in-active\\nQuery origin: hub\\nQuery fan-out: 420 spokes\\nSpokes are simple leaves but are not configured as stubs; no summarization boundary exists",
+      options: ["Increase every link delay until the route becomes passive", "Configure appropriate EIGRP stub behavior and summarization/query boundaries", "Redistribute the route into RIP on every spoke", "Disable feasible-successor calculation"],
+      answer: [1],
+      explanation: "Stub declarations and summarization constrain query scope so leaf devices are not queried for routes they cannot provide. This directly addresses SIA scale.",
+      distractors: "Metric manipulation does not bound the query domain. RIP redistribution adds risk. DUAL's feasibility logic is fundamental.",
+      verify: "Map query propagation, confirm stub capability/advertisements, introduce boundaries carefully, and repeat a failure convergence test.",
+      sourceTitle: "IETF RFC 7868 — Cisco EIGRP",
+      sourceUrl: "https://datatracker.ietf.org/doc/html/rfc7868"
+    },
+    {
+      id: 48, domain: "Redistribution", vendor: "Multi-vendor", difficulty: "Architect", type: "multiple",
+      prompt: "OSPF routes are redistributed into BGP at two sites and then redistributed back into OSPF at both sites. Which three controls best prevent feedback and ambiguity?",
+      exhibit: "Select three.\\nSite A: OSPF -> BGP and BGP -> OSPF\\nSite B: OSPF -> BGP and BGP -> OSPF\\nSame enterprise prefixes visible at both sites",
+      options: ["Tag routes at redistribution and reject the return tag", "Use explicit prefix policy with default deny", "Define ownership/primary-exit metrics and validate failure behavior", "Permit all routes in both directions so every protocol has full visibility"],
+      answer: [0,1,2],
+      explanation: "Tags, explicit prefix policy, and clear metric/ownership rules create a controlled redistribution boundary. Bidirectional permit-all redistribution invites route feedback, unexpected preference, and persistent loops.",
+      distractors: "Full mutual visibility without provenance controls is the hazardous option.",
+      verify: "Trace a representative prefix through both sites, inspect tags/attributes and RIB origin, then test single-site and inter-site failures.",
+      sourceTitle: "Check Point Gaia — Routing Policy Configuration",
+      sourceUrl: "https://sc1.checkpoint.com/documents/R80.30/WebAdminGuides/EN/CP_R80.30_Gaia_Advanced_Routing_AdminGuide/162207.htm"
+    },
+    {
+      id: 49, domain: "Forwarding", vendor: "Broadcom", difficulty: "Expert", type: "single",
+      prompt: "A switch using Broadcom silicon has four ECMP next hops. Many flows balance well, but all packets of one elephant flow choose the same path. What is the most accurate initial diagnosis?",
+      exhibit: "ECMP group: NH1, NH2, NH3, NH4\\n10,000 short flows: approximately even distribution\\nOne 80-Gbps UDP flow: NH3 only\\nNo member failures or drops",
+      options: ["The ECMP group is broken because every flow must stripe packet-by-packet", "Per-flow CRC/hash selection is preserving ordering; one flow can remain on one member even when the group is healthy", "OSPF installed only NH3", "The ASIC cannot support more than one ECMP path"],
+      answer: [1],
+      explanation: "Broadcom documentation describes hash-based ECMP selection. Per-flow hashing avoids reordering, so a single elephant flow does not prove a failed ECMP group.",
+      distractors: "The many-flow distribution and four programmed next hops contradict a single-path FIB. Packet-by-packet striping is not the normal assumption.",
+      verify: "Inspect the programmed ECMP group and hash fields, generate varied five-tuples, and consider resilient/dynamic load-balancing features supported by the exact NOS and ASIC.",
+      sourceTitle: "Broadcom BCM56070 — Equal-Cost Multipath",
+      sourceUrl: "https://docs.broadcom.com/doc/56070-PG2-PUB"
+    },
+    {
+      id: 50, domain: "Integrated Design", vendor: "Multi-vendor", difficulty: "Architect", type: "single",
+      prompt: "During a campus-core migration, the new pair forms OSPF and BGP successfully, but production sessions fail only after the final VLAN cut. Packet captures show return traffic arriving at the old firewall, while forward traffic uses the new core. What is the safest next action?",
+      exhibit: "T0 control-plane adjacencies verified\\nT1 test prefixes pass\\nT2 user VLAN gateway moves to new core\\nT3 forward path: client -> new core -> new firewall\\nT4 return path: server -> old firewall -> old core\\nT5 stateful firewall drops / sessions fail",
+      options: ["Increase BGP hold time and wait", "Continue migrating remaining VLANs to make the topology more consistent", "Pause/rollback the gateway cut, restore symmetric routing, then validate RIB, FIB, NAT/session state, and return-path policy before retrying", "Disable stateful inspection permanently"],
+      answer: [2],
+      explanation: "The evidence identifies asymmetric traversal across different stateful devices. A controlled rollback limits impact; the redesign must align both directions and state/NAT ownership before resuming.",
+      distractors: "BGP timers do not repair established asymmetry. Expanding the change increases blast radius. Disabling security is not an acceptable permanent fix.",
+      verify: "Perform bidirectional packet walks, compare route and policy decisions at both firewalls, inspect sessions/NAT, and rehearse the exact cutover and rollback gates.",
+      sourceTitle: "Cisco — Administrative Distance, RIB selection, and recursive resolution",
+      sourceUrl: "https://www.cisco.com/c/en/us/support/docs/ip/border-gateway-protocol-bgp/15986-admin-distance.html"
+    }
+  ];
+
+  const decisionFocus = [
+    "Use one intentionally identical MST region versus accepting a CIST boundary; the digest, not the trunk, decides.",
+    "Preserve Root Guard and correct unintended root placement versus disabling the safety control to restore traffic.",
+    "Use VSX shutdown-on-split for exposed non-MCLAG interfaces versus leaving both peers active during an ISL partition.",
+    "Use MLAG reload delay versus admitting downstream traffic before routing, ARP, and synchronization are ready.",
+    "Treat ICCP as the MC-LAG control dependency versus assuming an operational interchassis data link synchronizes peer state.",
+    "Use deterministic split-brain election versus allowing two isolated MCLAG peers to keep forwarding duplicate identities.",
+    "Enable deliberate LACP preemption when preferred-member restoration matters versus preserving the stable current member set.",
+    "Choose static versus dynamic LAG degradation cost with full awareness of metric-precedence behavior.",
+    "Build one MST region by matching all three identity inputs versus assuming the protocol name alone is sufficient.",
+    "Configure an explicit shared MST region identifier versus relying on per-switch defaults derived from unique MAC addresses.",
+    "Use an independent IRF MAD mechanism versus trusting the failed IRF fabric to prevent duplicate active partitions.",
+    "Suspend vulnerable vPC orphan ports with the peer-link failure action versus protecting only dual-attached vPC members.",
+    "Use per-flow LAG hashing for order preservation versus expecting one flow to consume every physical member.",
+    "Fix the MTU mismatch that breaks database-description exchange versus changing timers or authentication that already match.",
+    "Accept DROTHER 2-WAY state on broadcast networks versus forcing a wasteful full mesh of adjacencies.",
+    "Match OSPF area, authentication, timers, network type, and subnet semantics versus troubleshooting routes before neighbors.",
+    "Assign unique OSPF router IDs versus repeatedly clearing a symptom caused by duplicate LSA originators.",
+    "Use E1 when internal path cost should influence external selection versus E2 when only the external metric should dominate.",
+    "Validate NSSA translator election and Type-7 translation versus searching downstream routers that never received Type-5 state.",
+    "Resolve the advertised forwarding address versus assuming reachability to the ASBR is enough for external-route installation.",
+    "Use OSPFv3 link-local adjacency semantics versus treating mismatched global IPv6 prefixes as automatic neighbor failure.",
+    "Measure detection, routing, FIB, and application recovery separately versus calling the BFD timestamp end-to-end convergence.",
+    "Make one Gaia route-policy source authoritative versus leaving conflicting Portal and CLI redistribution controls in place.",
+    "Summarize inter-area routes on an ABR versus attempting Type-3 summarization on a non-ABR ASBR.",
+    "Condition default origination on real upstream reachability versus advertising a permanent default into a dead end.",
+    "Use LOCAL_PREF for local-AS exit policy versus expecting shorter AS_PATH to override a higher-priority policy attribute.",
+    "Compare MED in the documented neighboring-AS scope versus assuming every MED is globally comparable.",
+    "Use deterministic MED for repeatable within-AS grouping versus always-compare-MED across unrelated neighboring ASes.",
+    "Set next-hop self when the iBGP domain should not carry external next hops versus distributing those next hops in the IGP.",
+    "Use ORR, add-path, or topology-aware reflection versus forcing every client to inherit the reflector's exit perspective.",
+    "Use ORIGINATOR_ID and CLUSTER_LIST loop controls versus relying on AS_PATH inside route-reflection topology.",
+    "Make BGP multipath candidates attribute-compatible versus assuming maximum-paths bypasses best-path equivalence checks.",
+    "Measure remote propagation and hold timers versus blaming a local FIB that already reconverged.",
+    "Use contributor-dependent aggregation with controlled suppression versus a permanent discard route that advertises a blackhole.",
+    "Prepend only the advertisement toward the less-preferred inbound ISP versus changing local outbound preference.",
+    "Use NO_EXPORT to limit onward advertisement versus mistaking the community for local route rejection.",
+    "Create explicit Gaia inbound acceptance policy versus assuming Established state authorizes received prefixes.",
+    "Design Magic Transit around documented BGP and tunnel-health constraints versus assuming generic BFD and tunnel behavior.",
+    "Permit TCP/179 on the correct BIG-IP route-domain self IP and validate both HA peers versus debugging virtual-server policy.",
+    "Restore recursive next-hop reachability versus using firewall or NAT policy to repair an ineligible BGP route.",
+    "Use Graceful Restart only with preserved forwarding or safe withdrawal versus retaining stale routes toward a dead data plane.",
+    "Match the intended prefix-length range in Junos policy versus using exact /8 matching for /16 components.",
+    "Stage Nokia LAG metric degradation before operational down versus treating partial and total capacity loss identically.",
+    "Withdraw or suppress the L1 attached-bit default when L2 reachability is lost versus keeping a dead-end inter-area default.",
+    "Fix routing-instance and recursive-resolution scope versus treating adjacency and LSDB presence as proof of RIB installation.",
+    "Recognize RIP count-to-infinity and its metric ceiling versus interpreting increasing metrics as healthy convergence.",
+    "Use EIGRP stubs and summarization as query boundaries versus flooding Active queries through non-transit spokes.",
+    "Use narrow redistribution policy plus provenance tags and return-tag rejection versus unrestricted two-way redistribution.",
+    "Test ECMP with many flows and verify hardware members versus diagnosing per-flow hashing from one elephant flow.",
+    "Restore symmetric stateful forwarding and pause the cutover versus accepting correct routing adjacencies as service proof."
+  ];
+  const state = questions.map(() => ({ selected: [], correct: false }));
+  const $ = (id) => document.getElementById(id);
+  let submitted = false;
+
+  function sameAnswer(a, b) {
+    const left = [...a].sort((x,y) => x-y), right = [...b].sort((x,y) => x-y);
+    return left.length === right.length && left.every((v,i) => v === right[i]);
+  }
+  function letters(indices) { return indices.map(i => String.fromCharCode(65 + i)).join(", "); }
+  function addText(parent, tag, text, className) {
+    const node = document.createElement(tag);
+    if (className) node.className = className;
+    node.textContent = text;
+    parent.appendChild(node);
+    return node;
+  }
+  function updateStats() {
+    const answered = state.filter(s => s.selected.length).length;
+    $("answered").textContent = answered + " / " + questions.length + " answered";
+    $("progressBar").style.width = (answered / questions.length * 100) + "%";
+  }
+  function buildExam() {
+    const host = $("allQuestions");
+    host.innerHTML = "";
+    questions.forEach((q, index) => {
+      const article = document.createElement("article");
+      article.id = "question-" + q.id;
+      article.className = "card full-question";
+
+      const meta = document.createElement("div");
+      meta.className = "qmeta";
+      [["number", "Question " + q.id + " of 50"], ["", q.domain], ["", q.vendor], ["", q.difficulty]].forEach(item => {
+        addText(meta, "span", item[1], item[0]);
+      });
+      article.appendChild(meta);
+      addText(article, "h2", q.id + ". " + q.prompt);
+      addText(article, "div", "Design decision drilled: " + decisionFocus[index], "design-focus");
+      addText(article, "p", q.type === "multiple" ? "Select all answers that apply." : "Select the best answer.", "instruction");
+      if (q.exhibit) addText(article, "pre", q.exhibit, "exhibit");
+
+      const options = document.createElement("div");
+      options.className = "options";
+      options.setAttribute("role", "group");
+      options.setAttribute("aria-label", "Answers for question " + q.id);
+      q.options.forEach((option, optionIndex) => {
+        const input = document.createElement("input");
+        input.type = q.type === "multiple" ? "checkbox" : "radio";
+        input.name = "q-" + q.id;
+        input.id = "q-" + q.id + "-option-" + optionIndex;
+        input.value = optionIndex;
+        input.checked = state[index].selected.includes(optionIndex);
+        input.disabled = submitted;
+        input.addEventListener("change", () => {
+          state[index].selected = [...document.querySelectorAll('input[name="q-' + q.id + '"]:checked')].map(node => Number(node.value));
+          updateStats();
+        });
+        const label = document.createElement("label");
+        label.className = "option";
+        label.setAttribute("for", input.id);
+        const text = document.createElement("span");
+        text.textContent = String.fromCharCode(65 + optionIndex) + ". " + option;
+        label.append(input, text);
+        options.appendChild(label);
+      });
+      article.appendChild(options);
+      const feedback = document.createElement("section");
+      feedback.id = "feedback-" + q.id;
+      feedback.className = "feedback";
+      feedback.setAttribute("aria-live", "polite");
+      article.appendChild(feedback);
+      host.appendChild(article);
+    });
+    updateStats();
+  }
+  function submitExam(event) {
+    event.preventDefault();
+    if (submitted) return;
+    submitted = true;
+    const byDomain = {};
+    const reviewIds = [];
+    questions.forEach((q, index) => {
+      const s = state[index];
+      s.correct = sameAnswer(s.selected, q.answer);
+      if (!byDomain[q.domain]) byDomain[q.domain] = { total: 0, correct: 0 };
+      byDomain[q.domain].total++;
+      if (s.correct) byDomain[q.domain].correct++;
+      else reviewIds.push(q.id);
+
+      const card = $("question-" + q.id);
+      card.classList.add(s.correct ? "correct-card" : (s.selected.length ? "incorrect-card" : "unanswered-card"));
+      card.querySelectorAll("input").forEach(input => { input.disabled = true; });
+      card.querySelectorAll("label.option").forEach((label, optionIndex) => {
+        if (q.answer.includes(optionIndex)) label.classList.add("correct");
+        else if (s.selected.includes(optionIndex)) label.classList.add("incorrect");
+      });
+      const result = s.correct
+        ? '<h3 class="result-correct">Correct</h3>'
+        : '<h3 class="result-incorrect">' + (s.selected.length ? "Not correct" : "Unanswered") + '</h3>';
+      const feedback = $("feedback-" + q.id);
+      feedback.innerHTML = result +
+        '<p><strong>Correct answer:</strong> ' + letters(q.answer) + '</p>' +
+        '<p><strong>Decision rationale:</strong> ' + q.explanation + '</p>' +
+        '<p><strong>Why the alternatives fail:</strong> ' + q.distractors + '</p>' +
+        '<p><strong>Operational proof:</strong> ' + q.verify + '</p>' +
+        '<p class="source"><strong>Official source:</strong> <a target="_blank" rel="noopener noreferrer" href="' + q.sourceUrl + '">' + q.sourceTitle + '</a></p>';
+      feedback.className = "feedback visible";
+    });
+
+    const correct = state.filter(s => s.correct).length;
+    const answered = state.filter(s => s.selected.length).length;
+    const score = Math.round(correct / questions.length * 100);
+    const domainRows = Object.entries(byDomain).map(entry => entry[0] + " " + entry[1].correct + "/" + entry[1].total).join(" · ");
+    const reviewLinks = reviewIds.map(id => '<a href="#question-' + id + '">Q' + id + '</a>').join(" · ") || "None";
+    $("report").innerHTML =
+      '<h2>Exam report</h2><div class="report-grid">' +
+      '<div class="report-box"><strong>' + score + '%</strong>final score</div>' +
+      '<div class="report-box"><strong>' + correct + ' / 50</strong>correct</div>' +
+      '<div class="report-box"><strong>' + answered + ' / 50</strong>answered</div></div>' +
+      '<p><strong>Domain results:</strong> ' + domainRows + '</p>' +
+      '<p><strong>Review these decisions:</strong> ' + reviewLinks + '</p>' +
+      '<p>Every question is now locked. Correct answers, design rationale, rejected alternatives, verification steps, and official references are shown directly below each question.</p>';
+    $("report").className = "report visible";
+    $("submitExam").disabled = true;
+    $("submitExam").textContent = "Exam submitted";
+    $("submitNote").textContent = "Submitted. Use the report links to review missed design decisions.";
+    $("report").scrollIntoView({ behavior: "smooth", block: "start" });
+  }
+  function resetExam() {
+    if (!confirm("Reset all 50 answers and the submitted score?")) return;
+    submitted = false;
+    state.forEach(s => { s.selected = []; s.correct = false; });
+    $("report").className = "report";
+    $("report").innerHTML = "";
+    $("submitExam").disabled = false;
+    $("submitExam").textContent = "Submit Exam";
+    $("submitNote").textContent = "Your complete score and every explanation will appear only after submission. Unanswered items count as incorrect.";
+    buildExam();
+    $("quiz").scrollIntoView({ behavior: "smooth", block: "start" });
+  }
+  function init() {
+    buildExam();
+    $("examForm").addEventListener("submit", submitExam);
+    $("printExam").addEventListener("click", () => window.print());
+    $("resetExam").addEventListener("click", resetExam);
+  }
+  if (questions.length !== 50) throw new Error("Exam must contain exactly 50 questions.");
+  if (questions.some((q,i) => q.id !== i + 1 || q.options.length !== 4 || !q.answer.length)) throw new Error("Question bank validation failed.");
+  if (decisionFocus.length !== questions.length) throw new Error("Every question must map to a design decision.");
+  init();
+  </script>
+</body>
+</html>
