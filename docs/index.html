@@ -125,6 +125,17 @@
       background: rgba(7, 17, 31, .48);
     }
     .coverage strong { color: var(--accent-2); }
+    .exam-link {
+      display: inline-flex;
+      margin-top: 1.1rem;
+      padding: .72rem 1rem;
+      border-radius: .7rem;
+      color: #06211d;
+      background: var(--accent);
+      font-weight: 850;
+      text-decoration: none;
+    }
+    .exam-link:hover, .exam-link:focus-visible { filter: brightness(1.08); outline: 2px solid white; outline-offset: 2px; }
     .notice {
       margin-top: 1.25rem;
       padding: 1rem 1.1rem;
@@ -195,24 +206,22 @@
       <article class="exam-card" data-exam-date="2026-09-03">
         <div class="exam-meta">
           <span class="badge latest">Latest</span>
-          <span class="badge pending">Awaiting first exam file</span>
+          <span class="badge">Published</span>
+          <span class="badge">50 questions</span>
           <span class="badge">September 3, 2026</span>
         </div>
-        <h3>Daily Enterprise Routing &amp; Switching Design / Troubleshooting Exam</h3>
+        <h3>Daily Multi-Vendor Routing &amp; Switching Design / Troubleshooting Exam</h3>
         <p>
-          The first requested run will cover Layer 2 failure analysis, routed-protocol behavior,
-          multi-vendor design decisions, control-plane evidence, convergence, and production-safe remediation.
+          Senior-to-architect scenarios derived from public vendor documentation, with CLI output,
+          topology symptoms, convergence timelines, production-safe fixes, and complete explanations.
         </p>
         <ul class="coverage">
-          <li><strong>Switching:</strong> STP, RSTP, MSTP, MC-LAG, LACP/port channels, VLANs, trunks, and Layer 2 troubleshooting.</li>
-          <li><strong>Routing:</strong> OSPF, OSPFv3, RIP, RIPv2, BGP, eBGP, iBGP, EIGRP, and IS-IS.</li>
-          <li><strong>Question style:</strong> 50 comprehensive scenarios using outputs, topologies, failure symptoms, and design constraints.</li>
-          <li><strong>Sources:</strong> Public vendor documentation with topic-specific references and further reading.</li>
+          <li><strong>Layer 2 resiliency:</strong> MST region boundaries, vPC, VSX, MLAG/MC-LAG, FortiSwitch MCLAG, HPE IRF/MAD, LACP, split brain, and LAG degradation.</li>
+          <li><strong>OSPF/OSPFv3:</strong> MTU and adjacency states, DR/BDR behavior, duplicate router IDs, NSSA translation, forwarding addresses, BFD, and convergence phases.</li>
+          <li><strong>BGP and policy:</strong> best path, MED modes, next-hop resolution, route reflection/ORR, multipath, communities, aggregation, Graceful Restart, and multi-vendor edge behavior.</li>
+          <li><strong>Integrated troubleshooting:</strong> IS-IS L1/L2, RIP loops, EIGRP SIA, redistribution controls, Broadcom ECMP hashing, and stateful migration asymmetry.</li>
         </ul>
-        <div class="notice" role="status">
-          No exam artifact exists in this repository yet. Once a daily HTML exam is published,
-          its working link and coverage snippet will replace this status message.
-        </div>
+        <a class="exam-link" href="daily-multivendor-networking-exam-2026-09-03.html">Open today’s 50-question exam →</a>
       </article>
       <!-- EXAM_ENTRIES_END -->
     </section>
